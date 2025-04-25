@@ -2,8 +2,7 @@
 
 ---
 
-![1_main](https://github.com/user-attachments/assets/e2477c40-1fb3-4ac1-8b61-3e29680b0b04)
-<img src="https://github.com/user-attachments/assets/e2477c40-1fb3-4ac1-8b61-3e29680b0b04"  width="800" />
+<img src="https://github.com/user-attachments/assets/e2477c40-1fb3-4ac1-8b61-3e29680b0b04"  width="700" />
 
 ## 📄프로젝트 소개
 
@@ -52,7 +51,7 @@
 - 하단에는 페이지네이션이 구현되어 있다.
 - 우측 퀵메뉴에서는 찜한 상품의 갯수와 24시간 이내 조회한 상품 내역을 보여준다.
 
-![1_main](https://github.com/user-attachments/assets/0b4dcc3b-8bed-4a46-89a0-e5302beb6125)
+<img src="https://github.com/user-attachments/assets/0b4dcc3b-8bed-4a46-89a0-e5302beb6125"  width="700" />
 
 ### 2. 로그인
 
@@ -61,13 +60,13 @@
 - 회원가입은 이메일과 패스워드와 이름을 입력하여 가입할 수 있다.
 - 이메일을 중복체크를 할 수 있으며 패스워드를 두번 입력하여 동일해야 회원가입이 완료된다.
 
-![2_signin](https://github.com/user-attachments/assets/366e3d06-534e-4d7d-a92a-4b47dc142fa3)
+<img src="https://github.com/user-attachments/assets/366e3d06-534e-4d7d-a92a-4b47dc142fa3"  width="700" />
 
 ### 3. 검색
 
 - 상품명 또는 상점명을 입력하여 검색할 수 있다.
 
-![3_search](https://github.com/user-attachments/assets/3f31265e-325d-4afd-bc69-6aba32968d66)
+<img src="https://github.com/user-attachments/assets/3f31265e-325d-4afd-bc69-6aba32968d66"  width="700" />
 
 ### 4. 상점
 
@@ -82,7 +81,7 @@
     - 각 탭 영역의 좌측상단에는 리스트의 개수를 집계하고 있으며, 우측상단의 기준 변경으로 리스트를 정렬합니다.
     - 모든 탭에 페이지네이션과 정렬 기능이 반영되어 있습니다.
 
-![4_mypage](https://github.com/user-attachments/assets/501c1ca1-481d-4649-af7d-6ba4dac9231e)
+<img src="https://github.com/user-attachments/assets/501c1ca1-481d-4649-af7d-6ba4dac9231e"  width="700" />
 
 ### 5. 상품상세
 
@@ -95,7 +94,7 @@
 - 찜 버튼을 누르면 내가 찜을 눌렀는지 알 수 있고,  내 찜 목록에 들어갑니다.
 - 같은 카테고리의 상품들을 추천해 줍니다.
 
-![5_product](https://github.com/user-attachments/assets/b6b1b0b8-0b13-402d-8193-80c06a0d4599)
+<img src="https://github.com/user-attachments/assets/b6b1b0b8-0b13-402d-8193-80c06a0d4599"  width="700" />
 
 ### 6. 상품등록
 
@@ -108,7 +107,7 @@
     - 가격을 제안 받을지 정할 수 있고, 상품 거래 방식을 입력해야 합니다.
 - 정보를 다 입력하고 등록하기 버튼을 누르면 상품이 등록되고 상품 상세 페이지로 이동
 
-![6_insert](https://github.com/user-attachments/assets/4c832ed8-e447-4dbf-bb83-b403b3bc6e40)
+<img src="https://github.com/user-attachments/assets/4c832ed8-e447-4dbf-bb83-b403b3bc6e40"  width="700" />
 
 ### 7. 상품구입
 
@@ -117,7 +116,7 @@
 - 페이에서 돈이 출금 되며, 잔액이 부족하면 구매할 수 없습니다.
 - 구매를 성공하면 구매 완료 페이지로 이동합니다.
 
-![7_buy](https://github.com/user-attachments/assets/abd7906a-9874-4600-b2d0-6857f2c12fba)
+<img src="https://github.com/user-attachments/assets/abd7906a-9874-4600-b2d0-6857f2c12fba"  width="700" />
 
 ### 8. 채팅
 
@@ -127,11 +126,11 @@
 - db에 메시지를 기록하기 때문에 실시간으로 채팅을 하지 않아도 채팅 방을 누르면 언제든 채팅 기록을 볼 수 있습니다.
 - 채팅 방 목록에서 상점가기를 누르면 상대방의 개인 페이지로 이동합니다.
 
-![8_chat](https://github.com/user-attachments/assets/8b157a50-0ed8-4c04-b189-2f3bb22b9aec)
+<img src="https://github.com/user-attachments/assets/8b157a50-0ed8-4c04-b189-2f3bb22b9aec"  width="700" />
 
 ### 9. 거래관리
 
-![9_trans](https://github.com/user-attachments/assets/970b9e07-7980-4fe1-adb7-eef16293a2d9)
+<img src="https://github.com/user-attachments/assets/970b9e07-7980-4fe1-adb7-eef16293a2d9"  width="700" />
 
 - 사용자가 판매, 구매하는 상품의 거래를 관리하는 페이지입니다.
 - 상품 관리에서는 자신이 등록한 상품과 정보를 확인할 수 있습니다.
@@ -152,7 +151,7 @@
     - 신고 게시판에서는 플랫폼에서 접수된 모든 신고 내역 조회, 신고글 작성, 답변 확인 등이 가능합니다.
 - 모든 게시판에는 페이지네이션과 검색 기능이 반영되어 있습니다.
 
-![10_board](https://github.com/user-attachments/assets/33cd1d14-9a8f-4275-b2b5-4fd7a75c8539)
+<img src="https://github.com/user-attachments/assets/33cd1d14-9a8f-4275-b2b5-4fd7a75c8539"  width="700" />
 
 ### 11. 관리자
 
@@ -162,7 +161,7 @@
 - 최근 등록 상품 목록 5건을 조회할 수 있다.
 - 최근 거래내역 5건을 조회할 수 있다.
 
-![11_1_admin_main](https://github.com/user-attachments/assets/f23e6e26-a056-431e-ad20-78bf7ad36819)
+<img src="https://github.com/user-attachments/assets/f23e6e26-a056-431e-ad20-78bf7ad36819"  width="700" />
 
 ### 11-2. 카테고리
 
@@ -173,7 +172,7 @@
     - 대분류:  대분류를 수정한 뒤 수정된 대분류 명을 화면에 띄워줍니다.
     - 중분류: 해당 중분류명이 속해있는 대분류 명을 모달창에 띄워주고,  수정 후 수정된 중분류명을 화면에 출력해 줍니다.
 
-![11_2_admin_cate](https://github.com/user-attachments/assets/7a219f5a-993b-44de-85f3-74f90d94ba32)
+<img src="https://github.com/user-attachments/assets/7a219f5a-993b-44de-85f3-74f90d94ba32"  width="700" />
 
 ### 11-3. 채팅방 관리
 
@@ -182,7 +181,7 @@
 - 채팅방 명 클릭 시 채팅방에 참여한 멤버의 정보를 출력해 줍니다.
 - 검색한 채팅멤버의 회원번호, 이름, 별명 검색 시 해당 검색조건에 맞는 게시글을 셀렉트해 화면에 출력해 줍니다.
 
-![11_3_admin_chat](https://github.com/user-attachments/assets/cbd2c95e-5391-4ed7-952f-f9c081868eec)
+<img src="https://github.com/user-attachments/assets/cbd2c95e-5391-4ed7-952f-f9c081868eec"  width="700" />
 
 ### 11-4. 문의 게시판
 
@@ -202,7 +201,7 @@
     - 답변하기 버튼 클릭 시, textarea를 화면에 출력합니다.
     - 등록하기 버튼을 클릭하면 등록한 내용을 화면에 출력합니다.
 
-![11_4_admin_board](https://github.com/user-attachments/assets/7ba89892-dd6c-4694-ad73-0b0289808650)
+<img src="https://github.com/user-attachments/assets/7ba89892-dd6c-4694-ad73-0b0289808650"  width="700" />
 
 ### 11-5. 후기 내역
 
@@ -213,6 +212,6 @@
 - 취소 버튼 클릭 시: ‘삭제 취소’ 팝업 출력 후 delete 작업을 중단합니다.
 - 리뷰글의 번호, 거래상품 이름, 작성자 검색 시 해당 검색조건에 맞는 게시글을 셀렉트해 화면에 출력해 줍니다.
 
-![11_5_admin_review](https://github.com/user-attachments/assets/91a39c4b-9dd5-439c-821c-10e158bd1492)
+<img src="https://github.com/user-attachments/assets/91a39c4b-9dd5-439c-821c-10e158bd1492"  width="700" />
 
   
