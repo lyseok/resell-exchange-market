@@ -3,6 +3,7 @@
 ---
 
 ![1_main](https://github.com/user-attachments/assets/e2477c40-1fb3-4ac1-8b61-3e29680b0b04)
+<img src="https://github.com/user-attachments/assets/e2477c40-1fb3-4ac1-8b61-3e29680b0b04"  width="800" />
 
 ## 📄프로젝트 소개
 
