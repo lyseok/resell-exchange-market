@@ -1,0 +1,167 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+/* 초기화 */
+html {overflow-y:scroll}
+body {margin:0;padding:0;font-size:0.75em;font-family:'Pretendard-Regular', sans-serif;height:100%;}
+html, h1, h2, h3, h4, h5, h6, form, fieldset, img {margin:0;padding:0;border:0}
+h1, h2, h3, h4, h5, h6 {font-size:1em;font-family:'Pretendard-Regular', sans-serif;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display:block}
+
+ul{margin:0;padding:0;list-style:none}
+li,dt,dd,ol{margin:0;padding:0;word-break: break-all;}
+ol{list-style-position:inside}
+legend {position:absolute;margin:0;padding:0;font-size:0;line-height:0;text-indent:-9999em;overflow:hidden}
+label, input, button, select, img {vertical-align:middle}
+input, button {margin:0;padding:0;font-family:'Pretendard-Regular', sans-serif;font-size:1em}
+button,input[type="submit"] {cursor:pointer}
+textarea, select {font-family:'Pretendard-Regular', sans-serif;font-size:1em}
+select {margin:0}
+p {margin:0;padding:0;word-break:break-all}
+pre {overflow-x:scroll;font-size:1.1em}
+a:link, a:visited {color:#fff;text-decoration:none}
+
+* {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+h2{font-size: 1.083em;font-weight: 500;margin:10px 0}
+
+#wrapper {min-height:480px}
+/*중간*/
+#container{padding:0 0 0 220px;margin-top:100px;height:100%;background:#fff;width: 100%;}
+#container.container-small{padding-left:50px}
+#container_wr{padding:25px;min-height:500px}
+#container_title{position:fixed;top:50px;left:0;width:100%;line-height:50px;font-size:1.9em;padding:0 20px;margin-left:220px;border-bottom:1px solid #ddd;background:#fff;z-index:99;font-weight:300;}
+#container.container-small #container_title{padding-left:70px}
+.container_wr{padding:20px;}
+
+/* 화면낭독기 사용자용 */
+#hd_login_msg {position:absolute;top:0;left:0;width:1px;height:1px;overflow:hidden}
+.msg_sound_only, .sound_only {display:inline-block !important;position:absolute;top:0;left:0;margin:0 !important;padding:0 !important;width:1px !important;height:1px !important;font-size:0;line-height:0;border:0 !important;overflow:hidden !important}
+/* 본문 바로가기 */
+#to_content a {z-index:100000;position:absolute;top:0;left:0;font-size:0;line-height:0;overflow:hidden}
+#to_content a:focus, #to_content a:active {width:100%;height:70px;background:#fff;font-size:2em;font-weight:bold;text-align:center;text-decoration:none;line-height:3.1em}
+
+/* 버튼 */
+.btn_confirm {margin:0 0 20px}
+.btn_fixed_top{position:fixed;top:60px;right:10px;z-index:100}
+
+.btn_confirm01 {}
+.btn_confirm01 button {padding:0 15px;height:30px;border:0;background:#9eacc6;color:#fff}
+.btn_confirm01 a {display:inline-block;padding:0 15px;height:30px;background: #9eacc6;color: #fff;text-decoration:none;line-height:2.5em;vertical-align:middle}
+.btn_confirm01 a:focus {background:#555}
+
+.btn_confirm02 {clear:both;margin-top:10px;text-align:center}
+.btn_confirm02 button {padding:0 15px;height:30px;border:0;background:#617d46;color:#fff}
+.btn_confirm02 a {display:inline-block;padding:0 15px;height:30px;background:#617d46;color:#fff;text-decoration:none;line-height:2.5em;vertical-align:middle}
+.btn_confirm02 a:focus {background:#555}
+
+.btn_submit{background:#ff4081;color:#fff}
+a.btn_submit{background:#ff4081;color:#fff}
+
+
+.btn_confirm .btn_submit {padding:0 15px;border:0;height:30px;color:#fff}
+.btn_frmline {display:inline-block;padding:0 7px;height:24px;border:0;background:#444;color:#fff !important;letter-spacing:-0.1em;text-decoration:none;vertical-align:middle;line-height:2em} /* 우편번호검색버튼 등 */
+.btn_frmline:focus, .btn_frmline:hover, .btn_frmline:active {text-decoration:none}
+
+.btn_win {margin:0 20px 10px} /* 새창용 */
+
+.btn_win01 {clear:both;text-align:center}
+.btn_win01 a, .btn_win01 button {padding:0 10px;height:22px;border:1px solid #ccc;background:#fafafa}
+.btn_win01 a {display:inline-block;line-height:2em;cursor:pointer}
+.btn_win01 a:focus, .btn_win01 a:hover {text-decoration:none}
+
+.btn_list {margin:10px 0} /* 목록용 */
+.btn_list .btn_02{height:28px;padding:0 5px;border:0;}
+
+.btn_list01 {}
+.btn_list01 a:focus {background:#555}
+
+.btn_list02 {}
+.btn_list02 a:focus {background:#555}
+
+.btn_list03 {text-align:right}
+.btn_list03 a:focus {background:#555}
+
+
+.btn{height:30px;border:0;border-radius:5px;padding:0 10px;font-weight:bold;font-size:1.09em;vertical-align:middle}
+a.btn{display:inline-block;height:30px;line-height:30px;border:0;border-radius:5px;padding:0 10px;font-weight:bold;font-size:1.09em;vertical-align:middle}
+
+.btn_frmline{display:inline-block;background:#9eacc6;color:#fff;height:35px;border:0;border-radius:5px;padding:0 10px}
+a.btn_frmline{display:inline-block;background:#9eacc6;color:#fff;height:35px;line-height:33px;border-radius:5px;padding:0 10px;text-decoration:none !important}
+.btn_ov01{display:inline-block;line-height:30px;height:30px;font-size:0.92em;vertical-align:top}
+.btn_ov01:after{display:block;visibility:hidden;clear :both;content:""}
+.btn_ov01 .ov_txt{float:left;background:#9eacc6;color:#fff;border-radius:5px 0 0 5px;padding:0 5px}
+.btn_ov01 .ov_num{float:left;background:#ededed;color:#666;border-radius:0 5px 5px 0;padding:0 5px}
+a.btn_ov02,a.ov_listall{display:inline-block;line-height:30px;height:30px;font-size:0.92em;background:#565e8c;color:#fff;vertical-align:top;border-radius:5px;padding:0 7px }
+a.btn_ov02:hover,a.ov_listall:hover{background:#3f51b5}
+
+/*form*/
+.sound_only {display:inline-block !important;position:absolute;top:0;left:0;margin:0 !important;padding:0 !important;width:1px !important;height:1px !important;font-size:0;line-height:0;border:0 !important;overflow:hidden !important}
+.frm_input{padding:0 5px;height:35px;line-height:32px;border:1px solid #d5d5d5;}
+.frm_input_full{width:100%}
+.required{background:url('../img/wrest.gif') top right no-repeat #fff !important}
+select{height:35px;line-height:32px;border:1px solid #d5d5d5;}
+textarea{width:100%;border:1px solid #d5d5d5;min-height:80px;padding:8px;}
+textarea:focus-visible {
+	outline:1px solid #333;
+}
+legend {position:absolute;width:0;height:0;font-size:0;line-height:0;text-indent:-9999em;border:0;overflow:hidden}
+.code_input{font:bold 15px Consolas}
+
+/* 페이지 내 안내문 */
+.local_desc {display:flex; gap:20px; margin-bottom:10px;justify-content:space-between;}
+.local_desc p{color:#a7a7a7; font-size:1.15em;}
+.local_desc p span{color:#333;}
+.local_wr{margin:0 0 10px }
+.local_wr:after{display:block}
+.readonly {}
+
+/*color*/
+.color_bk{color:#333 !important;}
+.color_gray{color:#a7a7a7;}
+
+
+/* 테이블 */
+table {clear:both;width:100%;border-collapse:collapse;border-spacing:0;}
+table caption {height:0;font-size:0;line-height:0;overflow:hidden}
+table td{line-height: 22px;}
+tfoot th, tfoot td {border:1px solid #d6dce7;background:#eee;padding:5px;text-align:center;font-weight:bold;}
+tfoot th {}
+
+.tbl_wrap {margin:0 0 10px;padding:0}
+
+/* thead 한 줄 테이블 */
+.tbl_head01 table {clear:both;width:100%;border-collapse:collapse;border-spacing:0;    table-layout: fixed;}
+.tbl_head01 thead th {background:#e6e6e6;color:#333;font-weight:normal;text-align:center;padding:8px 5px;font-size:1.1em}
+.tbl_head01 thead th a{color:#333}
+.tbl_head01 thead input {vertical-align:top} /* middle 로 하면 게시판 읽기에서 목록 사용시 체크박스 라인 깨짐 */
+.tbl_head01 thead a {color:#383838;text-decoration:underline}
+.tbl_head01 tbody th{border:1px solid #d6dce7;padding:5px;text-align:center}
+.tbl_head01 tbody td{border-bottom:1px solid #d6dce7;padding:3px;text-align:center; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;height:28px;}
+.tbl_head01 tbody td a{color:#333;}
+.tbl_head01 tbody td .frm_input{width:100%;}
+.tbl_head01 tbody td select{width:100%}
+.tbl_head01 table .tbl_input{height:27px;line-height:25px;border:1px solid #d5d5d5;width:100%}
+.tbl_head01 table select {height: 27px;line-height: 25px;width: 100%;}
+
+/* 자바스크립트 alert 대안 */
+#validation_check {margin:100px auto;width:500px}
+#validation_check h1 {margin-bottom:20px;font-size:1.3em}
+#validation_check p {margin-bottom:20px;padding:30px 20px;border:1px solid #e9e9e9;background:#fff}
+
+/* 관리자 비밀번호 확인 */
+#admin_confirm {padding:0 0 10px;background:#222;text-align:center}
+#admin_confirm p {margin:0 0 10px;color:#9ab9c5;background:#383a3f}
+#admin_confirm label {color:#fff}
+#admin_confirm .frm_input {border-color:#000}

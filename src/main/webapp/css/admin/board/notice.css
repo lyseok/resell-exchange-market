@@ -1,0 +1,83 @@
+@charset "UTF-8";
+/* 
+  <div class="local_desc local_desc03">
+      <form action="" class="search_form">
+          <select name="searchNotice" id="searchNotice">
+              <option value="no">번호</option>
+              <option value="title">제목</option>
+          </select>
+          <div>
+              <input type="text">
+              <span class="material-symbols-outlined" id="searchNoticeBtn">
+                  search
+              </span>
+          </div>
+      </form>
+  </div>
+*/
+
+.local_desc03 {
+	width: 100%;
+	justify-content: flex-end;
+}
+
+.search_form {
+    display: flex;
+    color: #c4c4c4;
+}
+
+.search_form select {
+    border: 1px solid #c4c4c4;
+    width: 70px;
+    border-radius: 5px;
+    padding: 0;
+    margin-left: 10px;
+    text-align: center;
+    height: 25px;
+}
+
+.search_form div {
+    display: flex;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 0;
+    height: 25px;
+    margin-left: 10px;
+	overflow: hidden;
+}
+
+.search_form div input {
+    border: none;
+    outline: none;
+    width: 140px;
+    height: 100%;
+    
+}
+.search_form div span {
+    align-items: center;
+    cursor: pointer;
+}
+
+#notice_cont,
+#noticeCont,
+#noticeContent {
+    min-height: 400px;
+}
+
+
+.notice_insert_wrap #noticeTitle{
+	width: 100%;
+    border: 1px solid #d5d5d5;
+    padding: 8px;
+}
+
+
+
+.btn_wrap{
+	text-align:right;
+}
+.btn-primary{
+	background:#ad49e1;
+	color:#fff;
+	font-weight:500;
+}

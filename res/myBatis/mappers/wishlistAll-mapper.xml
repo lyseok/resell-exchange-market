@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wishlistall">
+	<select id="getwishlistall" resultType="wishlistallVO">
+		
+	   select w.mem_no, w.prod_no, to_char(w.wish_create_at, 'yyyy-mm-dd hh24:mm'), p.prod_name
+ 		 from wishlist w, product p
+ 		where w.prod_no = p.prod_no
+ 		 
+	</select>
+	
+	<sql id="dynamicSearch">
+	<where>
+	<if test="select == 'prod_name'">
+		prod_name like '%'||#{value}||'%'
+	</if>
+	<if test="select == 'prod_no'">
+		w.prod_no = #{value}
+	</if>
+	<if test="select == 'mem_no'">
+		w.mem_no = #{value}
+	</if>
+	</where>
+	</sql>
+	
+	<select id="searchwishlistall" parameterType="map" resultType="wishlistallVO">
+		select 
+			w.mem_no, w.prod_no, wish_create_at,
+			prod_name  
+		from WISHLIST w left outer join product p on(w.prod_no = p.prod_no)
+		<include refid="dynamicSearch"/>
+		order by 1
+	</select>
+	
+	
+</mapper>

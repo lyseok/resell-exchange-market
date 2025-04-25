@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notification">
+	<select id="selectAllNotification" parameterType="int" resultType="NotificationVO">
+		select NOTIF_ID, MEM_NO, NOTIF_TYPE, NOTIF_MESSAGE, NOTIF_IS_READ, NOTIF_AT, NOTIF_URL
+		  from notification
+		 where notif_is_read = 0
+		   and mem_no = #{mem_no}
+		 order by 1 desc
+	</select>
+	
+	<select id="seqNextVal" resultType="int">
+		select seq_notificat.nextval from dual
+	</select>
+	
+	<insert id="insertNotification" parameterType="NotificationVO">
+		insert into notification(NOTIF_ID, MEM_NO, NOTIF_TYPE, NOTIF_MESSAGE, NOTIF_IS_READ, NOTIF_AT, NOTIF_URL)   
+			select #{notif_id},
+     			   mem_no,
+				   #{notif_type}, 
+				   #{notif_message},
+				   0,
+				   sysdate,
+				   (select #{notif_url}||max(notice_no)
+				      from notice_board)
+			from member
+	</insert>
+	
+	<update id="updateNotificationRead" parameterType="NotificationVO">
+		update notification
+		   set notif_is_read = 1
+		 where notif_id = #{notif_id}
+		   and mem_no = #{mem_no}
+	</update>
+</mapper>

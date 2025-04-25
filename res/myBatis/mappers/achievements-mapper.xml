@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="achievements">
+	<select id="selectAllAchievements" parameterType="int" resultType="AchievementsVO">
+		select * from achievements
+		order by 1
+	</select>
+	
+	<sql id="dynamicSearch">
+	   <where>
+	      <if test="select == 'ach_name'">
+	          	${select} like '%'||#{value}||'%'
+	       </if>
+	       <if test="select == 'ach_no'">
+	       		${select} = #{value}
+	       </if>
+	   </where>
+	</sql>
+	
+	<select id="searchAchievements" parameterType="map" resultType="AchievementsVO">
+		select * from achievements
+  		 <include refid="dynamicSearch"/>
+  		 order by 1
+	</select>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+<mapper namespace="message">
+	<select id="selectMessageList" resultType="MessageVO">
+		SELECT MSG_NO,
+		       CHAT_ROOM_NO,
+		       MEM_NO,
+		       MSG_CONT,
+		       MSG_CREATE_AT,
+		       MSG_IMGCK 
+		  FROM MESSAGE
+		 ORDER BY 1 DESC
+	</select>
+	
+	
+	<select id="searchMessage" resultType="MessageVO" parameterType="map">
+		SELECT *
+		  FROM MESSAGE
+		 <include refid="dynamicsearch" />
+		 ORDER BY 1 DESC
+	</select>
+	
+	<sql id="dynamicsearch">
+		<where>
+			<if test="select == 'mem_no'">
+		 		mem_no = #{value}				
+			</if>
+			<if test="select == 'msg_cont'">
+		 		msg_cont like '%'|| #{value} ||'%'				
+			</if>
+		</where>
+	</sql>
+
+	<select id="searchMessageCont" resultType="MessageVO" parameterType="String">
+		SELECT *
+		  FROM MESSAGE
+		 where msg_cont=#{msg_cont}
+		 ORDER BY 1 DESC
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="trans" >
+	<update id="updateNewing" parameterType="ProductVO">
+		update product
+			set prod_newing = systimestamp
+			where mem_no = #{mem_no} and prod_no = #{prod_no}
+	</update>
+	
+	
+	<insert id="insertTransaction" parameterType="TransVO">
+		<selectKey resultType="int" keyProperty="txn_no" order="BEFORE">
+			select MAX(txn_no)+1 from transaction
+		</selectKey>
+		insert into transaction
+		values(#{txn_no}, #{prod_no}, #{mem_no}, 0, sysdate, null)
+	</insert>
+	
+	
+	<update id="deleteProd" parameterType="ProductVO">
+		update product 
+   		 set prod_deleted = 1
+   		 where mem_no = #{mem_no} and prod_no = #{prod_no}
+	</update>
+	
+	
+	
+	
+	<insert id = "insertTrackInfo" parameterType = "ShippingVO">
+		insert into shipping(ship_id, txn_no, ship_porv, track_num)
+			values(seq_shipping.nextval, #{txn_no}, #{ship_porv}, #{track_num})
+	</insert>
+	
+	<select id = "getSellProdReview" parameterType = "int" resultType = "ReviewTransVO">
+		select 
+        p.prod_name, 
+        p.prod_price, 
+        m.mem_name, 
+        r.review_rating, 
+        r.review_cont
+   			 from transaction t
+    		 join product p on t.prod_no = p.prod_no
+   			 join member m on t.mem_no = m.mem_no
+    		 left join review r on t.txn_no = r.txn_no
+    		 where t.txn_no = #{txn_no}
+	
+	</select>
+	
+	
+	<select id ="getTrackInfo" parameterType = "int" resultType = "ShippingVO">
+		select * from shipping
+			where txn_no = #{txn_no}
+	</select>
+	
+	
+	
+	<update id="updateConfrimProd" parameterType = "map">
+		update transaction
+			set txn_status = #{status}
+			where txn_no = #{txnNo}
+	</update>
+	
+	
+	
+	
+	
+	<select id ="getStatusAllProd" parameterType ="TransImgVO" resultType = "TransImgVO">
+	SELECT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, 
+       P.PROD_TR_APPROCH, P.PROD_TR_STATUS,
+       T.TXN_NO, T.TXN_CREATE_AT, T.TXN_STATUS,
+       I.FILE_ID, I.FILE_ORG_NAME, I.FILE_SAVE_NAME, I.FILE_PATH
+		FROM PRODUCT P
+		LEFT JOIN TRANSACTION T ON P.PROD_NO = T.PROD_NO 
+		LEFT JOIN IMG_FILE I ON P.PROD_NO = I.FILE_NO AND I.FILE_SOURCE = 200
+		WHERE P.MEM_NO = #{mem_no} and I.FILE_TOTAL = 1 and p.prod_deleted = 0
+		and t.txn_no = #{txn_no}
+		order by t.txn_create_at desc
+	</select>
+	
+	
+	<select id="getStatusBuyProd" parameterType="TransImgVO" resultType="TransImgVO">
+		select p.prod_no, p.prod_name, p.prod_price,t.txn_create_at,
+		       p.prod_tr_approch, p.prod_tr_status, 
+		       t.txn_no, t.txn_create_at, t.txn_status,
+		       i.file_id, i.file_org_name, i.file_save_name, i.file_path
+				from transaction t
+				join product p on t.prod_no = p.prod_no
+				left join img_file i on p.prod_no = i.file_no and i.file_source = 200
+				where t.mem_no = #{mem_no} and i.file_total = 1
+				and t.txn_status = #{txn_status}
+				order by t.txn_create_at desc
+	</select>
+	
+	
+	<select id="getStatusSellProd" parameterType="TransImgVO" resultType="TransImgVO">
+		select p.prod_no, p.prod_name, p.prod_price,t.txn_create_at,
+	      	 p.prod_tr_approch, p.prod_tr_status, 
+	     	 t.txn_no, t.txn_create_at, t.txn_status,
+	         i.file_id, i.file_org_name, i.file_save_name, i.file_path
+			from product p
+			join transaction t on p.prod_no = t.prod_no
+			left join img_file i on p.prod_no = i.file_no and i.file_source = 200
+			where p.mem_no = #{mem_no} and i.file_total = 1  and p.prod_deleted = 0
+			and t.txn_status = #{txn_status}
+			order by t.txn_create_at desc
+	</select>
+	
+	
+	
+	<insert id="insertReview" parameterType="ReviewImgVO">
+		insert into review (
+		    txn_no, review_rating, review_cont, review_timestamp, review_status
+		) values (
+		    #{txn_no}, #{review_rating}, #{review_cont}, systimestamp, 0
+		)
+	
+	</insert>
+	
+	
+	
+	<select id="getProdImg" parameterType ="int" resultType="TransImgVO">
+			select p.prod_no, p.prod_name, p.prod_price, p.prod_at, TO_CHAR(p.prod_newing,'YYYY-MM-DD HH24:MI:SS') AS PROD_NEWING, p.prod_tr_approch, p.prod_tr_status,
+      		 i.file_id, i.file_org_name, i.file_save_name, i.file_path
+			from product p left join img_file i on p.prod_no = i.file_no and i.file_source = 200
+			where p.mem_no = #{mem_no} and i.file_total = 1  and p.prod_deleted = 0
+			order by prod_newing desc
+	</select>
+	
+	
+	<select id="getBuyImg" parameterType="int" resultType="TransImgVO">
+		
+		SELECT T.TXN_NO, P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, T.TXN_CREATE_AT, T.TXN_STATUS,p.prod_tr_approch, p.prod_tr_status,
+	       I.FILE_ID, I.FILE_ORG_NAME, I.FILE_SAVE_NAME, I.FILE_PATH
+			FROM TRANSACTION T
+			JOIN PRODUCT P ON T.PROD_NO = P.PROD_NO
+			LEFT JOIN IMG_FILE I ON P.PROD_NO = I.FILE_NO AND I.FILE_SOURCE = 200 
+			WHERE T.MEM_NO = #{mem_no} and i.file_total = 1
+			order by t.txn_create_at desc	
+	
+	</select>
+	
+	
+	<select id="getSellImg" parameterType="int" resultType="TransImgVO">
+		SELECT T.TXN_NO, P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, T.TXN_CREATE_AT, T.TXN_STATUS, p.prod_tr_approch, p.prod_tr_status,
+	       I.FILE_ID, I.FILE_ORG_NAME, I.FILE_SAVE_NAME, I.FILE_PATH
+			FROM TRANSACTION T
+			JOIN PRODUCT P ON T.PROD_NO = P.PROD_NO
+			LEFT JOIN IMG_FILE I ON P.PROD_NO = I.FILE_NO AND I.FILE_SOURCE = 200
+			WHERE p.MEM_NO = #{mem_no} and i.file_total = 1  and p.prod_deleted = 0
+			order by t.txn_create_at desc
+	</select>
+	
+	
+	<select id="getReviewInfo" parameterType="int" resultType="ReviewImgVO">
+		SELECT 
+		    P.PROD_NAME,         
+		    P.PROD_PRICE,       
+		    F.FILE_ORG_NAME,     
+		    F.FILE_SAVE_NAME,    
+		    F.FILE_PATH,         
+		    R.REVIEW_CONT,       
+		    R.REVIEW_RATING,     
+		    M.MEM_NAME           
+			FROM TRANSACTION T
+			INNER JOIN PRODUCT P ON T.PROD_NO = P.PROD_NO
+			INNER JOIN REVIEW R ON T.TXN_NO = R.TXN_NO
+			INNER JOIN MEMBER M ON T.MEM_NO = M.MEM_NO
+			LEFT JOIN IMG_FILE F 
+			       ON P.PROD_NO = F.FILE_NO AND F.FILE_SOURCE = 200  
+			WHERE T.TXN_NO = #{txn_no} and f.file_total = 1
+	</select>
+	
+	
+	<select id="getProdInfo" parameterType = "int" resultType = "TransImgVO">
+		select p.prod_name, 
+	       p.prod_price, 
+	       f.file_id, 
+	       f.file_org_name, 
+	       f.file_save_name, 
+	       f.file_size, 
+	       f.file_type, 
+	       f.file_path
+			from transaction t
+			inner join product p on t.prod_no = p.prod_no
+			inner join img_file f on p.prod_no = f.file_no
+			where t.txn_no = #{txn_no}
+			  and f.file_source = 200 and f.file_total = 1
+	</select>
+	
+	
+	<update id="updateProdStatus" parameterType = "map">
+		update product 
+			set prod_tr_status = #{newStatus}
+			where prod_no = #{prodNo}
+	</update>
+	
+	
+	
+	
+	<select id ="getProdTrStatus" parameterType = "int" resultType ="TransImgVO">
+		 select 
+			    p.prod_no,
+			    p.mem_no, 
+			    p.prod_name,
+			    p.prod_price,
+			    p.prod_at,
+			    TO_CHAR(p.prod_newing, 'YYYY-MM-DD HH24:MI:SS') AS PROD_NEWING,
+			    p.prod_deleted,
+			    p.price_offer,
+			    p.prod_tr_status,
+			    p.prod_tr_approch,
+			    p.prod_view,
+			    f.file_id,
+			    f.file_org_name,
+			    f.file_save_name,
+			    f.file_size,
+			    f.file_type,
+			    f.file_path,
+			    f.file_no,
+			    f.file_total
+			from 
+			    product p
+			
+			left join 
+			    img_file f 
+			on p.prod_no = f.file_no and f.file_source = 200
+			
+			where 
+			    p.mem_no = #{mem_no} and p.prod_tr_status = #{prod_tr_status} and f.file_total = 1  and p.prod_deleted = 0
+	</select>
+	
+	
+	
+	<select id = "deleteCount" parameterType = "int"  resultType = "int">
+		select prod_deleted
+		    from product 
+		    where prod_no = #{prod_no};
+	</select>
+
+	<select id="selectAdminMainTransact" resultType="AdminTransVO">
+	<![CDATA[
+	    select f.txn_no, f.mem_name as buyer, f.prod_no, f.txn_create_at, f.prod_name, f.prod_price, f.seller 
+		  from (select * 
+		          from (select a.TXN_NO, c.mem_name, b.prod_no, a.txn_status, txn_create_at
+		                  from TRANSACTION a, product b, member c
+		                 where a.prod_no = b.prod_no
+		                   and a.mem_no = c.mem_no) d, 
+		               (select a.prod_no as prod_num, a.prod_name, a.prod_price, b.mem_name as seller
+		                 from product a, member b
+		                where a.mem_no = b.mem_no) e
+		         where d.prod_no = e.prod_num
+		         order by txn_no desc) f
+		 where rownum <= 5
+    ]]>
+	</select>
+	
+	<select id="selectAllAdminMainTransact" resultType="AdminTransVO">
+		select d.txn_no, d.buyer, d.prod_no, d.txn_create_at, e.prod_name, e.prod_price, e.seller  
+          from (select a.TXN_NO, c.mem_name as buyer, b.prod_no, a.txn_status, txn_create_at
+                  from TRANSACTION a, product b, member c
+                 where a.prod_no = b.prod_no
+                   and a.mem_no = c.mem_no) d, 
+               (select a.prod_no as prod_num, a.prod_name, a.prod_price, b.mem_name as seller
+                 from product a, member b
+                where a.mem_no = b.mem_no) e
+         where d.prod_no = e.prod_num
+         order by txn_no desc
+	</select>
+	
+	<select id="searchAdminMainTransact" parameterType="int" resultType="AdminTransVO">
+		select d.txn_no, d.buyer, d.prod_no, d.txn_create_at, e.prod_name, e.prod_price, e.seller  
+          from (select a.TXN_NO, c.mem_name as buyer, b.prod_no, a.txn_status, txn_create_at
+                  from TRANSACTION a, product b, member c
+                 where a.prod_no = b.prod_no
+                   and a.mem_no = c.mem_no) d, 
+               (select a.prod_no as prod_num, a.prod_name, a.prod_price, b.mem_name as seller
+                 from product a, member b
+                where a.mem_no = b.mem_no) e
+         where d.prod_no = e.prod_num
+           and d.txn_no = #{txn_no}
+
+	</select>
+	
+	
+	
+	
+	<select id="isThereReview" parameterType="Integer" resultType="Integer">
+		select count(*) from review where txn_no = #{txn_no}
+	</select>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+<mapper namespace="admcate">
+	<select id="selectMainCate" resultType="CateMainVO">
+		select *
+		  from CATEGORY_MAIN
+		 order by cate_main_id desc
+	</select>
+	<select id="selectSubCateAll" resultType="CateMainVO">
+		select *
+		  from CATEGORY_MAIN
+		 order by cate_main_id desc
+	</select>
+	<select id="selectSubCate" resultType="CateSubVO" parameterType="int">
+		select *
+	      from CATEGORY_SUB
+	     where CATE_MAIN_ID = #{cate_main_id}
+		 order by cate_sub_id desc
+	</select>
+	
+	<insert id="insertMainCate" parameterType="String">
+		insert into CATEGORY_MAIN(CATE_MAIN_ID, CATE_MAIN_NAME)
+			 values(CATEGORY_MAIN_SEQ.nextval, #{cate_main_name})
+	</insert>
+	
+	<insert id="insertSubCate" parameterType="CateSubVO">
+		insert into CATEGORY_SUB(CATE_SUB_ID, CATE_MAIN_ID, CATE_SUB_NAME)
+			 values(CATEGORY_SUB_SEQ.nextval, #{cate_main_id}, #{cate_sub_name})
+	</insert>
+	
+	
+	<update id="updateMainCate" parameterType="CateMainVO">
+		update CATEGORY_MAIN
+		   set CATE_MAIN_NAME=#{cate_main_name}
+		 where CATE_MAIN_ID = #{cate_main_id}
+	</update>
+	
+	<update id="updateSubCate" parameterType="CateSubVO">
+		update CATEGORY_SUB
+		   set CATE_SUB_NAME=#{cate_sub_name}
+		 where CATE_SUB_ID = #{cate_sub_id}
+	</update>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reportComments">
+	<select id="selectReportComments" parameterType="int" resultType="ReportCommentsVO">
+		select RPT_MEM_NO, CMT_CONT, CMT_AT 
+		  from report_comments
+		 where rpt_mem_no = #{rpt_mem_no}
+	</select>
+	
+	<insert id="insertReportComments" parameterType="ReportCommentsVO">
+		insert into REPORT_COMMENTS(RPT_MEM_NO, CMT_CONT, CMT_AT)
+ 		     values (${rpt_mem_no}, #{cmt_cont}, sysdate)
+	</insert>
+	
+	<update id="updateReportComments" parameterType="ReportCommentsVO">
+		update report_comments
+		   set cmt_cont = #{cmt_cont}
+		 where rpt_mem_no = #{rpt_mem_no}
+	</update>
+</mapper>

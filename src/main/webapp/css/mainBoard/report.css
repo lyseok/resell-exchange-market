@@ -1,0 +1,308 @@
+@charset "UTF-8";
+
+.kcy_board{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-shrink: 0;
+	padding: 0px 20px;
+}
+.kcy_boardHeader{
+	font-size: 20px;
+	font-weight: bold;
+	padding-bottom: 20px;
+	flex-shrink: 0;
+}
+.kcy_boardHeader .bHeader_normal{
+	color: #575757;
+}
+.kcy_boardHeader .bHeader_highlight{
+	color: #7a1cac;
+}
+
+.kcy_boardSearch {
+	flex-shrink: 0;
+	display: flex;
+	flex-direction: row-reverse;
+}
+.kcy_serch_box {
+	border: 2px solid #ccc;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 5px 10px 5px 15px;
+}
+.kcy_boardList{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	line-height:1.4; 
+}
+.kcy_boardList li{
+    display: inline-flex;
+    border-bottom: 1px solid #cecece;
+    padding: 10px 20px 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+.kcy_boardList li #articleTitle{
+	font-size: 18px;
+	font-weight: bold;
+	color: #555555;
+}
+.kcy_boardList li #articleAt{
+	font-size: 15px;	
+}
+.kcy_boardView{
+	display: flex;
+    flex-direction: column;
+}
+
+.kcy_boardView .kcy_viewHeader{
+	display: inline-block;
+	padding: 20px 20px 10px 20px;
+	width: 100%;
+}
+.kcy_boardView .kcy_viewHeader #viewTitle{
+	color: #333;
+	float: left;
+	font-size: 22px;
+	font-weight: bold;
+}
+.kcy_boardView .kcy_viewHeader .viewExtra{
+	float: right;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.kcy_boardView .kcy_viewContent{
+	padding: 10px 20px;
+	float: left;
+	width: 85%;	
+}
+.kcy_boardView .kcy_viewContent p{
+	line-height: 1.4;
+	text-overflow: ellipsis;
+	white-space: wrap;
+	overflow: auto;
+	color: #676767;
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+.kcy_boardBackToList{
+	display: flex;
+	justify-content: center;
+}
+.kcy_boardBackToList #listButton{
+	width: 100px;
+    height: 40px;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.kcy_boardBackToList #listButton2{
+    width: 140px;
+    height: 36px;
+    margin-left: 250px;
+}
+.kcy_boardBackToList #listButton:active{
+	width: 100px;
+    height: 40px;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #e3e3e3;
+}
+
+.kcy_boardTable{
+	width: 100%;
+}
+.kcy_boardTable .first_row *{
+	background-color: #fff;
+	font-weight: bold;
+	vertical-align: middle;
+	height: 40px;
+	font-size: 18px;
+	text-align: center;
+	border-bottom: 2px solid;
+	color: #979797;
+}
+.kcy_boardTable .first_col {
+	width: 10%;
+	text-align: center;
+	vertical-align: middle;
+	height: 42px;
+}
+.kcy_boardTable .second_col {
+	width: 50%;
+	text-align: left;
+	vertical-align: middle;
+	padding-left: 2%;
+	color: #676767;
+}
+.kcy_boardTable .third_col {
+	width: 20%;
+	text-align: center;
+	vertical-align: middle;
+}
+.kcy_boardTable .fourth_col {
+	text-align: center;
+	vertical-align: middle;
+}
+.kcy_boardTable .fourth_col a{
+	color: #676767;
+}
+
+.kcy_boardSection{
+	padding-left: 20px;
+}
+.kcy_boardSection .sectionEctra{
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	gap: 5px;
+}
+.kcy_boardSection .sectionEctra .ectraColumn{
+	display: flex;
+    flex-direction: row;
+}
+.kcy_boardSection .ectraColumn .ectKey{
+	font-weight: bold;
+	color: #b7b7b7;
+	font-size: 14px;
+	width: 100px;
+}
+.kcy_boardSection .ectraColumn .ectValue{
+	color: #777777;
+	font-size: 14px;
+}
+.kcy_boardView .cmt_status{
+	display: inline-block;
+    text-align: left;
+    width: 100%;
+    color: #333;
+}
+.kcy_boardView .kcy_whatTheFuck{
+	display: block;
+    text-align: left;
+    padding: 50px 10px 20px 10px;
+}
+.kcy_boardView .kcy_cmtContent{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.kcy_boardView .kcy_cmtContent .kcy_viewContent.fuckingComments{
+	width: 80%;
+}
+.kcy_boardView .kcy_cmtContent #cmt_viewAt{
+	width: 120px;
+    text-align: right;
+}
+.kcy_board .kcy_viewFooter{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.kcy_board .kcy_viewFooter .null{
+	width: 30%;
+}
+.kcy_board .kcy_viewFooter .buttons{
+	width: 40%;
+}
+.kcy_board .kcy_viewFooter .GeulSsooGi{
+	width: 30%;
+    display: flex;
+    justify-content: right;
+}
+.kcy_board .kcy_viewFooter .GeulSsooGi input{
+	background-color: #AD49E1;
+	color: #F5F5F5;
+	width: 140px;
+    height: 36px;
+}
+.kcy_boardForm{
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	padding: 20px;
+	height: 533px;
+}
+.kcy_boardForm .formType,.formTitle,.formTextarea,.formAttach{
+	display: inline-block;
+}
+.kcy_boardForm .boardForm_column{
+	float: left;
+    width: 10%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.kcy_boardForm .boardForm_column .boardForm_colText{
+	display: inline-block;
+    font-size: 1.3rem;
+}
+.kcy_boardForm .boardForm_value{
+	float: right;
+    width: 90%;
+    padding: 0px 20px 0px;
+    align-items: center;
+    height: 40px;
+    display: flex;
+    margin-top: 10px;
+}
+.kcy_boardForm .boardForm_value *{
+	padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+    flex-grow: 1;
+}
+.kcy_boardForm .boardForm_value select,option {
+	background-color: #fff;
+	border-radius: 15px;
+	height: 35px; 
+	color: #6e6e6e;
+}
+.kcy_boardForm .boardForm_value input{
+	height: 35px;
+}
+.kcy_boardForm .boardForm_value textarea{
+	line-height: 1.4;
+	color:#6e6e6e;
+}
+.kcy_boardFAQTab{
+	display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 40px;
+    padding: 0px 200px 0px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 13px;
+	margin-bottom: 20px;
+}
+.kcy_boardFAQTab .tabItems{
+    width: 17%;
+    font-size: 20px;
+    height: 30px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.kcy_boardFAQTab .tabItems .tabItemSpan{
+	text-align: center;
+    display: block;
+}
+.tabItems:hover .tabA span{
+	color: #3a3a3a;
+	transition: color 0.3s ease-in-out;
+}
+.kcy_board .kcy_boardList_div{
+	height:460px;
+}
+.kcy_board .kcy_boardTable_div{
+	height: 460px;
+}

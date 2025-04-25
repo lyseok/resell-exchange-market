@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chat">
+	<select id="getAllChatuser" parameterType="int"
+		resultType="ChatVO">
+		SELECT
+		a.chat_room_no,
+		a.mem_no,
+		b.chat_user,
+		c.mem_alias,
+		MAX(d.msg_no) AS latest_msg_no,
+		(
+		SELECT msg_cont
+		FROM message
+		WHERE
+		chat_room_no = a.chat_room_no
+		AND msg_no = (SELECT MAX(msg_no) FROM
+		message WHERE chat_room_no =
+		a.chat_room_no)
+		) AS msg_cont
+		FROM chatroom
+		a
+		JOIN chatmember b ON a.chat_room_no =
+		b.chat_room_no
+		JOIN member c ON
+		b.chat_user = c.mem_no
+		JOIN message d ON
+		a.chat_room_no = d.chat_room_no
+		WHERE a.mem_no = #{mem_no} OR
+		b.chat_user = #{mem_no}
+		GROUP BY
+		a.chat_room_no, b.chat_user, a.mem_no,
+		c.mem_alias
+		ORDER BY
+		a.chat_room_no DESC
+	</select>
+
+	<select id="getAllChatroom" parameterType="int"
+		resultType="ChatVO">
+		SELECT
+		a.chat_room_no,
+		a.mem_no,
+		b.chat_user,
+		c.mem_alias,
+		MAX(d.msg_no) AS latest_msg_no,
+		(
+		SELECT msg_cont
+		FROM message
+		WHERE
+		chat_room_no = a.chat_room_no
+		AND msg_no = (SELECT MAX(msg_no) FROM
+		message WHERE chat_room_no =
+		a.chat_room_no)
+		) AS msg_cont
+		FROM chatroom
+		a
+		JOIN chatmember b ON a.chat_room_no = b.chat_room_no
+		JOIN member c ON
+		a.mem_no = c.mem_no
+		JOIN message d ON a.chat_room_no = d.chat_room_no
+		WHERE b.chat_user = #{mem_no}
+		GROUP BY a.chat_room_no, b.chat_user,
+		a.mem_no, c.mem_alias
+		ORDER BY a.chat_room_no DESC
+	</select>
+
+	<select id="getMessage" parameterType="int" resultType="MessageVO">
+		select *
+		from message a
+		LEFT JOIN (
+		SELECT file_no, file_path, MAX(file_id) AS max_file_id
+		FROM img_file
+		WHERE file_source = 100
+		GROUP BY file_no, file_path
+		) b_sub ON a.mem_no = b_sub.file_no
+		LEFT JOIN img_file c ON b_sub.file_no = c.file_no AND b_sub.max_file_id =
+		c.file_id
+		join member c on a.mem_no = c.mem_no
+		where chat_room_no = #{chat_room_no}
+		order by msg_create_at
+	</select>
+	
+	<select id="countChatroom" parameterType="hashmap" resultType="int">
+		select a.chat_room_no from chatroom a, chatmember b
+		where a.chat_room_no = b.chat_room_no
+        and mem_no = #{mem_no}
+        and chat_user = #{chat_user}
+	</select>
+
+	
+	<insert id="insertChatroom" parameterType="chatRoomVO">
+		<selectKey resultType="int" keyProperty="chat_room_no" order="BEFORE">
+			select MAX(chat_room_no)+1 from chatroom
+		</selectKey>
+		insert into chatroom
+		values(
+			#{chat_room_no}, #{mem_no}, #{chat_name}, sysdate
+		)
+	</insert>
+	
+	<insert id="insertChatmember" parameterType="chatMemberVO">
+		<selectKey resultType="int" keyProperty="chat_mem_no" order="BEFORE">
+			select MAX(chat_mem_no)+1 from chatmember
+		</selectKey>
+		insert into chatmember
+		values(
+			#{chat_mem_no}, #{chat_room_no}, 0, #{chat_user}
+		)
+	</insert>
+	
+	<insert id="sendMessage" parameterType="MessageVO" >
+		<selectKey resultType="int" keyProperty="msg_no" order="BEFORE">
+			select MAX(msg_no)+1 from message
+		</selectKey>
+		insert into message
+		values(
+			#{msg_no}, #{chat_room_no}, #{mem_no}, #{msg_cont}, sysdate, 0
+		)
+	</insert>
+</mapper>

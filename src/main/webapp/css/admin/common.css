@@ -1,0 +1,292 @@
+@charset "UTF-8";
+
+.dp_f{
+	display:flex !important;
+}
+.jc_fe{
+	justify-content:flex-end !important;
+}
+.jc_sb{
+	justify-content:space-between !important;
+}
+
+.ai_c{
+	align-items:center !important;
+}
+.ai_fe{
+	align-items:flex-end !important;
+}
+.ai_fs{
+	align-items:flex-start !important;
+}
+.mt0{
+	margin-top:0 !important;
+}
+
+.gap60{
+	gap:60px !important;
+}
+.gap20{
+	gap:20px !important;
+}
+.fd_c{
+	flex-direction: column !important;
+}
+
+.local_desc02{height:16px;}
+
+
+input[type="text"]{
+	width:100%;
+	border:1px solid #ccc;
+	padding:8px;
+	border-radius:5px;
+}
+select{
+	border-radius:5px;
+	padding:8px;
+}
+
+
+/* 검색창 */ 
+.local_desc03{
+	display:flex;
+	margin-bottom:10px;	
+}
+.search_form {
+    display: flex;
+    color: #c4c4c4;
+}
+
+.search_form select {
+    border: 1px solid #c4c4c4;
+    width: 100px;
+    border-radius: 5px;
+    padding: 0;
+    margin-left: 10px;
+    text-align: center;
+    height: 25px;
+}
+
+.search_form div {
+    display: flex;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 0;
+    height: 25px;
+    margin-left: 10px;
+	overflow: hidden;
+}
+
+.search_form div input {
+    border: none;
+    outline: none;
+    width: 140px;
+    height: 100%;
+    font-size: 0.8rem;
+    padding:5px;
+    
+}
+.search_form div span {
+    align-items: center;
+    cursor: pointer;
+}
+
+
+/* 페이저 버튼 */
+.pager_wrap{
+	margin-top:30px;
+}
+.pager_wrap ul{
+	display:flex;
+	justify-content:center;	
+}
+.pager_wrap ul a{
+	display:inline-block;
+	font-size:12px;
+	color:#666;
+	width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #ccc;
+    margin-right:-1px;
+    text-align: center;
+}
+.pager_wrap ul li:last-child a{
+	margin-right:0;
+}
+
+.pager_wrap ul li.on a{
+	color:#ad49e1;
+}
+
+
+
+
+/* 게시글 보기 - 답변하기버튼 */
+#addComments{
+    background: #ad49e1;
+    padding: 0 50px;
+    height: 40px;
+    color: #fff;
+    border: 0;	
+}
+/* 게시글보기 -  글작성, 수정버튼 */
+.btn_wrap {
+	text-align:right;
+}
+.btn_wrap button,
+.btn_wrap input[type="button"],
+.btn_wrap input[type="submit"]{
+	display: inline-block;
+    padding: 0 30px;
+    height: 35px;
+    background: #fff;
+    text-decoration: none;
+    line-height: 35px;
+    vertical-align: middle;
+    border: none;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    color: #333;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+.btn_wrap .btn-primary {
+    background: #ad49e1 !important;
+    color: #fff !important;
+    font-weight: 500;
+}
+/* FAQ - 삭제버튼 */
+.btn_wrap #deleteBtn{
+	background: #ad49e1;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+/* 게시글 리스트 - 글자 색만 변경하는 삭제버튼 */
+#deleteBtn,
+.adm_del_btn{
+	background: none;
+    border: none;
+    color: #ad49e1;
+}
+/* 게시글 리스트 - 게시글 등록 버튼 */
+.boardInsertBtn {
+	display: inline-block;
+    padding: 0 30px;
+    height: 35px;
+    background: #ad49e1;
+    text-decoration: none;
+    line-height: 35px;
+    vertical-align: middle;
+    border: none;
+    font-size: 14px;
+    color: #333;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+
+
+/* 게시글 리스트 - 마우스 오버 시 스타일 */
+.board_name{
+	cursor:pointer;
+}
+.board_name:hover{
+	font-weight:bold;
+}
+
+/* 게시글 보기 답변 전 style */
+#status_ck{
+	padding: 0 20px 10px;
+    border: none;
+	border-bottom:1px solid #ccc;
+}
+#status_ck .admin_status{
+	padding:0;
+}
+#status_ck .btn_list{
+	margin:0;
+}
+#addComments{
+	height:40px;
+	line-height:40px;
+	padding:0 45px;
+	font-size:14px;
+}
+
+/* 답변완료 시 수정	버튼 style */
+.admin_cont .admin_cmt_box_rt{
+	display:flex;
+	flex-direction:column;
+	row-gap:20px;
+	flex-basis:163px;
+	align-items:flex-end;
+	
+}
+.admin_cont .admin_cmt_box_rt b{	
+    color: #bababa;
+    font-size: 16px;
+    font-weight:300;
+}
+.admin_cont .admin_cmt_box_rt .updateComments{
+	display: inline-block;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    padding: 0 15px;
+    line-height: 30px;
+    color: #a7a7a7;
+    cursor:pointer;
+}
+
+
+/* 관리자 - 게시글 보기 답글 */
+.admin_cont form{
+	width:100%;
+}
+.admin_comments_form{
+	display:flex;
+	gap:10px;
+}
+.admin_comments_form textarea{
+	width:calc(100% - 100px);
+}
+.admin_comments_form button{
+	width:100px;
+	border:none;
+	
+}
+
+
+
+/* 테이블 영역 넘겼을 시 스크롤 */
+.over_scroll_cont{
+	padding: 0;
+    height: calc(100vh - 217px);
+    overflow: auto;
+    margin-bottom: 0;
+    border:1px solid #ccc;
+}
+.over_scroll_cont th{
+	position:sticky;
+	top:0;
+}
+
+.over_scroll_cont tbody tr:last-child td{
+	border-bottom:0;
+}
+
+/* 채팅방관리전용 css */
+.over_scroll_cont2{
+	height:264px;
+}
+
+/* FAQ전용 css */
+.over_scroll_cont3{
+	height:calc(100vh - 246px);
+}

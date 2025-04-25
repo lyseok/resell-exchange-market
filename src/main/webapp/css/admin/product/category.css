@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+.container_wr section{
+	height:calc(100vh - 141px);
+}
+.cate_tit_cont{
+	display:flex;
+	justify-content:space-between;
+	align-items: flex-end;
+	margin-bottom:10px;
+}
+.cate_tit_cont h3{
+	font-size: 24px;
+	font-weight:400;
+}
+.cate_tit_cont span{
+	font-size:15px;
+	color:#ad49e1;
+	cursor:pointer;
+}
+.table_bd{
+	border:1px solid #ccc;
+	height:calc(100% - 39px);
+	
+}
+
+.tbl_head01 tbody td{
+	height:40px;
+}
+
+.tbl_head01 tbody .main_name{
+	cursor:pointer;
+}
+
+/* 모달창 */
+.popup-head{
+	padding-top:20px;
+}
+.popup-body{
+	padding:20px 25px 15px;
+}
+.popup-body label{
+	display:flex;
+	width:100%;
+	align-items: center;
+}
+.popup-body label:first-child{
+	margin-bottom:10px;
+}
+.popup-body label select{
+	width:calc(100% - 70px);
+	border-radius:5px;
+}
+.popup-body label span{
+	width:70px;
+	font-size:14px;
+	color:#666;
+	text-align:left;
+}
+.popup-body label input{
+	width:calc(100% - 70px);
+	border:1px solid #ccc;
+	outline:none;
+	border-radius:5px;
+	padding:8px;
+}
+
+/*  분류수정 모달 스타일 */
+#popup3 label span,
+#popup4 label span{
+	width:120px;
+	
+}
+#popup3 label input,
+#popup4 label input{
+	width:calc(100% - 120px);	
+}
+#popup3 label input:disabled{
+	color:#999;
+}
+input:focus{
+	border:1px solid #333;
+}
+.modify{
+	cursor:pointer;
+	
+}

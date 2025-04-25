@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="view">
+	<select id="getviewlist" resultType="viewcountVO">
+		
+	   select view_no, mem_no, prod_no, view_at
+ 		 from viewcount
+ 		
+ 		 
+	</select>
+	
+	<sql id="dynamicSearch">
+	<where>
+	
+	<if test="select == 'prod_no'">
+		prod_no = #{value}
+	</if>
+	<if test="select == 'mem_no'">
+		mem_no = #{value}
+	</if>
+	</where>
+	</sql>
+	
+	<select id="searchviewlist" parameterType="map" resultType="viewcountVO">
+		select 
+			view_no, mem_no, prod_no, view_at
+			
+		from viewcount
+		<include refid="dynamicSearch"/>
+		order by 1
+	</select>
+	
+	
+</mapper>

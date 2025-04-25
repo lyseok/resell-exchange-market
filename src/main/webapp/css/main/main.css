@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+
+/* 임시코드 */
+*{
+	color:#a7a7a7;
+}	
+.cate_wrap, .main_slide, .list_cont{
+	display:flex;
+	text-align : center;
+	align-items: flex-start;
+	justify-content: center;
+	flex-direction: column;
+	gap:15px;
+}
+
+
+.cate_wrap{
+	height:30px;
+	justify-content: flex-start;
+	margin:10px auto;
+}
+.list_wrap h1{
+	margin:30px 0;
+}
+
+.promo .swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.promo .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.promo .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.promo .swiper-button-prev,
+.promo .swiper-button-next {
+  width: 42px;
+  height: 42px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  opacity: .5;
+  margin-top: 0;
+  transform: translateY(-50%);
+}
+.promo .swiper-button-prev {
+  left: 50%;
+  margin-left: -540px;
+}
+.promo .swiper-button-next {
+  right: 50%;
+  margin-right: -540px;
+}
+
+.promo .swiper-button-prev:after, 
+.promo .swiper-rtl .swiper-button-next:after,
+.promo .swiper-button-next:after, 
+.promo .swiper-rtl .swiper-button-prev:after{
+	display:none;
+}
+
+.promo .arrow span{
+	color:#fff;
+}
+
+
+
+/* PAGENATION */
+.buttons {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top:50px;
+}
+
+.button {
+  padding: 0 12px;
+  font-size: 16px;
+  color: #333;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+.button.active,
+.button:hover {
+  color: #ad49e1;
+  font-weight: 600;
+}
+.prev {
+  position: absolute;
+  left: -2.5rem;
+}
+
+.next {
+  position: absolute;
+  right: -2.5rem;
+}
+
+ion-icon {
+  padding-top: 0.05rem;
+}

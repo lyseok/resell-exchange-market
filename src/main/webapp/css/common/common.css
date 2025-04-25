@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+/* header + footer 높이값을 뺀 height */
+.hf100vh{height:calc(100vh - 574px);}
+
+/* display 속성 */
+.dp_b{display:block !important;}
+.dp_n{display:none !important;}
+.dp_f{display:flex !important;}
+
+/* flex 속성 */
+.jc_c{justify-content:center !important;}
+.jc_sb{justify-content:space-between !important;}
+
+.ai_c{align-items:center !important;}
+
+/* 버튼 스타일 */
+#user_btn_wrap{display:flex; gap:10px; margin-top:20px;}
+/* 버튼 - 확인 */
+#conFirm{background:#AD49E1; padding:7px 20px; color:#fff;}
+/* 버튼 - 회색 */
+#grayBtn{background:#ccc; padding:7px 20px; color:#fff;}

@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+element.style{
+	font-family : 'Pretendard-Regular';
+}
+
+hr{
+	background:#f3f2f2;
+    height:1px;
+    border:0;
+}
+
+.cont{
+	border : none;
+	border-top:1px solid #ccc;
+	display:flex;
+	flex-direction: column;
+	gap:15px;
+}
+
+.inner h1{
+	margin:25px 0;
+	font-size : 2.5em;
+	color : #6E6E6E;
+}
+
+.innerCont{
+	display : flex;
+	position : relative;
+	text-align : center;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.text{
+	margin-top : 150px;
+	width : 800px;
+	display:flex;
+	text-align : center;
+	align-items: flex-start;
+	justify-content: center;
+}
+.innerCont2{
+	display : flex;
+	flex-direction : row;
+}
+.text2{
+	margin-left : 290px;
+	width : 60px;
+	margin-bottom : 20px;
+}
+.item2{
+	margin-left : 40px;
+}
+#purple{
+	color : #9B59B6;
+}
+#txn_no{
+	color : #9B59B6;
+}
+.button{
+	display : flex;
+	flex-direction : row;
+}
+.btn{
+	margin : 10px;
+	width : 180px;
+	height : 50px;
+	border : none;
+	cursor : pointer;
+}
+.material-symbols-outlined.but{
+	color : white;
+	
+}
+.btnText{
+	margin-left : 5px;
+	color : white;
+}
+#main{
+	background-color : #ccc;
+}
+#order{
+	background-color : #FFB74D;
+}
+#mpage{
+	background-color : #9B59B6;
+}

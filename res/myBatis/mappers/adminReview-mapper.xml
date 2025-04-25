@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="admrv">
+	<select id="selectReviewList" resultType="ReviewImgVO">
+		select R.TXN_NO,
+		       TO_CHAR(R.REVIEW_TIMESTAMP, 'YYYY-MM-DD HH24:MI') AS REVIEW_TIMESTAMP,
+		       R.REVIEW_STATUS,
+		       R.REVIEW_RATING,
+		       R.REVIEW_CONT,
+               P.PROD_NAME,
+		       M.MEM_ALIAS AS mem_name
+		  from REVIEW R
+		 inner join TRANSACTION T ON(R.TXN_NO = T.TXN_NO )
+         inner join MEMBER M ON(T.MEM_NO = M.MEM_NO)
+         inner join PRODUCT P ON(T.PROD_NO = P.PROD_NO)
+         order by 1 desc
+	</select>
+	
+	<select id="selectReviewModal" resultType="ReviewImgVO" parameterType="int">
+		  select R.TXN_NO,
+	             TO_CHAR(R.REVIEW_TIMESTAMP, 'YYYY-MM-DD HH24:MI') AS REVIEW_TIMESTAMP,
+	             R.REVIEW_STATUS,
+	             R.REVIEW_RATING,
+	             R.REVIEW_CONT,
+	             P.PROD_NAME,
+	             P.PROD_PRICE,
+	             T.MEM_NO,
+	             M.MEM_ALIAS AS mem_name,
+	             F.FILE_ID,
+	             F.FILE_ORG_NAME,
+	             F.FILE_SAVE_NAME,
+	             F.FILE_SIZE,
+	             F.FILE_TYPE,
+	             F.FILE_PATH,
+	             F.FILE_SOURCE,
+	             F.FILE_NO,
+	             F.FILE_TOTAL
+	        from REVIEW R
+	       inner join TRANSACTION T ON(R.TXN_NO = T.TXN_NO)
+	       inner join PRODUCT P ON(P.PROD_NO = T.PROD_NO)
+	       inner join MEMBER M ON(M.MEM_NO = p.MEM_NO )
+	       inner join IMG_FILE F ON (P.PROD_NO = F.FILE_NO)
+	        where F.FILE_SOURCE=200
+	            and F.FILE_TOTAL = 1
+	          and T.TXN_NO= #{txn_no}
+	</select>
+	
+	<delete id="deleteReviewModal" parameterType="int">
+		delete REVIEW
+		 where TXN_NO=#{txn_no}
+	</delete>
+	
+	
+	<select id="searchReview" resultType="ReviewImgVO" parameterType="map">
+		select R.TXN_NO,
+		       TO_CHAR(R.REVIEW_TIMESTAMP, 'YYYY-MM-DD HH24:MI') AS REVIEW_TIMESTAMP,
+		       R.REVIEW_STATUS,
+		       R.REVIEW_RATING,
+		       R.REVIEW_CONT,
+               P.PROD_NAME,
+		       M.MEM_ALIAS AS mem_name
+		  from REVIEW R
+		 inner join TRANSACTION T ON(R.TXN_NO = T.TXN_NO )
+         inner join MEMBER M ON(T.MEM_NO = M.MEM_NO)
+         inner join PRODUCT P ON(T.PROD_NO = P.PROD_NO)
+         <include refid="dynamicsearch" />
+         order by 1 desc
+	</select>
+	
+	<sql id="dynamicsearch">
+		<where>
+			<choose>
+	            <when test="select == 'txn_no'">
+	                R.TXN_NO = #{value}
+	            </when>
+	            <when test="select == 'prod_name'">
+	                P.PROD_NAME like '%' || #{value} || '%'
+	            </when>
+	            <when test="select == 'mem_name'">
+	                M.MEM_ALIAS = #{value}
+	            </when>
+	        </choose>
+		</where>
+	</sql>
+</mapper>

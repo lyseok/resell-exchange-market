@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qna">
+	<select id="selectQnaList" resultType="QnaBoardVO">
+		select QNA_NO,
+		       MEM_NO,
+		       QNA_TITLE,
+		       QNA_TYPE,
+		       TO_CHAR(QNA_AT, 'YYYY-MM-DD HH24:MI') as QNA_AT,
+		       QNA_CONT,
+		       QNA_STATUS,
+		       QNA_COM_STATUS
+		  from QNA_BOARD
+		  order by QNA_NO desc
+	</select>
+	
+	
+	<select id="seletQnaView" parameterType="int" resultType="QnaBoardVO">
+		select QNA_NO,
+		       MEM_NO,
+		       QNA_TITLE,
+		       QNA_TYPE,
+		       TO_CHAR(QNA_AT, 'YYYY-MM-DD') as QNA_AT,
+		       QNA_CONT,
+		       QNA_STATUS,
+		       QNA_COM_STATUS
+		  from QNA_BOARD
+		 where QNA_NO=#{qna_no}
+	</select>
+	
+	<delete id="deleteQna" parameterType="int">
+		delete QNA_BOARD
+		 where qna_no=#{qna_no}
+	</delete>
+	
+	
+	<sql id="dynamicsearch">
+		<where>
+			<if test="select=='mem_no'">
+				${select} = #{value}
+			</if>
+			<if test="select=='qna_title'">
+				${select} like '%'||#{value}||'%'
+			</if>
+		</where>
+	</sql>
+	<select id="searchQna" parameterType="map" resultType="QnaBoardVO">
+		select QNA_NO,
+		       MEM_NO,
+		       QNA_TITLE,
+		       QNA_TYPE,
+		       TO_CHAR(QNA_AT, 'YYYY-MM-DD HH24:MI') as QNA_AT,
+		       QNA_CONT,
+		       QNA_STATUS,
+		       QNA_COM_STATUS
+		  from QNA_BOARD
+		 <include refid="dynamicsearch" />
+  		 order by 1 desc
+	</select>
+	
+	<insert id="insertQna" parameterType="QnaBoardVO">
+		INSERT INTO QNA_BOARD
+		VALUES(seq_qna_board.nextval, #{mem_no}, #{qna_title}, #{qna_type}, systimestamp, #{qna_cont}, 0, 0)
+	</insert>
+	
+	<select id="getQnaNoImmediately" parameterType="Integer" resultType="Integer">
+		SELECT QNA_NO FROM QNA_BOARD WHERE MEM_NO = #{mem_no} AND ROWNUM = 1 ORDER BY QNA_NO desc
+	</select>
+
+</mapper>

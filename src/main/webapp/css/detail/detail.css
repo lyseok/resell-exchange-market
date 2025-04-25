@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+
+/* 
+	상품상세 css - 임시 css
+ */
+*{
+	color:#a7a7a7;
+}	
+.prod_info, .prod_recommend, .discript_seller_wrap{
+	border:1px solid #ccc;
+	text-align:center; 
+	display:flex;
+	align-items:center;
+	justify-content: center;
+}
+
+.prod_info{
+	height:300px;
+	margin: 20px auto;
+}
+
+.prod_recommend{
+	height:100px;	
+	margin-bottom:20px;
+}
+.discript_seller_wrap{
+	height:300px;
+}

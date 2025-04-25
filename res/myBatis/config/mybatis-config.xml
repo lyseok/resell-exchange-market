@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+	 PUBLIC "-//mybatis.org/DTD Config 3.0//EN" 
+	 "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- DB 연결 정보가 저장된 db.properties 파일 정보 설정 -->
+	<properties resource="myBatis/config/db.properties"></properties>
+	
+	<!-- myBatis 기본 설정 -->
+	<settings>
+		<!-- 데이터가 null 로 전달되면 빈칸으로 인지하지 말고 null 로 인식해라 -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- 
+	긴 전체 경로를 포함한 클래스명을 대신해서 사용할 별명을 등록한다.
+	형식)
+	<typeAliases>
+		<typeAlias type="패키지명까지 포함된 전체 이름" alias="별명"/>
+	</typeAliases>
+	 -->
+	 
+	 <typeAliases>
+		<typeAlias type="rem.admin.board.notice.vo.NoticeBoardVO" alias="NoticeBoardVO"/>	
+		<typeAlias type="rem.admin.board.report.vo.ReportBoardVO" alias="ReportBoardVO"/>
+		<typeAlias type="rem.admin.board.report.vo.ReportCommentsVO" alias="ReportCommentsVO"/>	
+		<typeAlias type="rem.admin.board.qna.vo.QnaBoardVO" alias="QnaBoardVO"/>
+		<typeAlias type="rem.admin.board.faq.vo.FAQBoardVO" alias="FAQBoardVO"/>
+		<typeAlias type="rem.admin.transaction.safetransaction.vo.SafeTXNVO" alias="SafeTXNVO"/>
+		<typeAlias type="rem.admin.badge.vo.AchievementsVO" alias="AchievementsVO"/>
+		<typeAlias type="rem.login.vo.MemberVO" alias="MemberVO"/>		
+		<typeAlias type="rem.login.vo.UpdateMemberVO" alias="UpdateMemberVO"/>		
+		<typeAlias type="rem.wishlist.vo.WishlistVO" alias="WishlistVO"/>
+		<typeAlias type="rem.product.vo.ProductVO" alias="ProductVO"/>	
+		<typeAlias type="rem.product.vo.CateMainVO" alias="CateMainVO"/>	
+		<typeAlias type="rem.product.vo.CateSubVO" alias="CateSubVO"/>	
+		<typeAlias type="rem.product.vo.CateNameVO" alias="CateNameVO"/>	
+		<typeAlias type="rem.product.vo.ViewCountVO" alias="ViewCountVO"/>	
+		<typeAlias type="rem.product.vo.NewViewVO" alias="NewViewVO"/>	
+		<typeAlias type="rem.store.vo.MemberProgressVO" alias="MemberProgressVO"/>	
+		<typeAlias type="rem.file.vo.ImgFileVO" alias="ImgFileVO"/>		
+		<typeAlias type="rem.chat.vo.MessageVO" alias="MessageVO"/>	
+		<typeAlias type="rem.review.vo.ReviewVO" alias="ReviewVO"/>	
+		<typeAlias type="rem.transaction.vo.ProdTransactionVO" alias="TransVO"/>	
+		<typeAlias type="rem.search.vo.SearchVO" alias="SearchVO"/>	
+		<typeAlias type="rem.admin.board.qna.vo.QnaCommentsVO" alias="QnaCommentsVO"/>	
+		<typeAlias type="rem.transaction.vo.ShippingVO" alias="ShippingVO"/>
+		<typeAlias type="rem.product.vo.ProdImgVO" alias="ProdImgVO"/>
+		<typeAlias type="rem.review.vo.ReviewImgVO" alias="ReviewImgVO"/>
+		<typeAlias type="rem.transaction.vo.ReviewTransactionVO" alias="ReviewTransVO"/>
+		<typeAlias type="rem.admin.product.wishlist.vo.WishlistAllVO" alias="WishlistAllVO"/>
+		<typeAlias type="rem.transaction.vo.TransactionImgVO" alias="TransImgVO"/>
+		<typeAlias type="rem.notification.vo.NotificationVO" alias="NotificationVO"/>
+		<typeAlias type="rem.deposit.vo.DepositVO" alias="DepositVO"/>
+		<typeAlias type="rem.admin.board.qna.vo.QnaSetVO" alias="QnaSetVO"/>
+		<typeAlias type="rem.chat.vo.ChatRoomVO" alias="ChatRoomVO"/>
+		<typeAlias type="rem.chat.vo.ChatVO" alias="ChatVO"/>
+		<typeAlias type="rem.chat.vo.ChatMemberVO" alias="ChatMemberVO"/>
+		<typeAlias type="rem.admin.board.report.vo.ReportSetVO" alias="ReportSetVO"/>
+		<typeAlias type="rem.admin.main.vo.AdminTransVO" alias="AdminTransVO"/>
+		<typeAlias type="rem.category.vo.CategoryMainVO" alias="CategoryMainVO"/>
+		<typeAlias type="rem.category.vo.CategorySubVO" alias="CategorySubVO"/>
+
+		
+	</typeAliases>
+	
+	<!-- DB연결 설정 -->
+	<environments default="oracleDev">
+	
+		<!-- DB에 연결하는 설정 한가지를 구성한다. -->
+		<environment id="oracleDev">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${user}"/>
+				<property name="password" value="${pass}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- DB에서 처리할  SQL문이 작성된 XML문서 등록하기 -->
+	<!-- 
+		형식) <ㅡmapper resource="경로/파일명.xml"/> 
+	-->
+	<mappers>
+		<mapper resource="myBatis/mappers/noticeBoard-mapper.xml"/>
+		<mapper resource="myBatis/mappers/reportBoard-mapper.xml"/>
+		<mapper resource="myBatis/mappers/reportComments-mapper.xml"/>
+		<mapper resource="myBatis/mappers/achievements-mapper.xml"/>
+		<mapper resource="myBatis/mappers/member-mapper.xml"/>
+		<mapper resource="myBatis/mappers/wishlist-mapper.xml"/>
+		<mapper resource="myBatis/mappers/product-mapper.xml"/>
+		<mapper resource="myBatis/mappers/store-mapper.xml"/>
+		<mapper resource="myBatis/mappers/imgfile-mapper.xml"/>
+		<mapper resource="myBatis/mappers/transaction-mapper.xml"/>
+		<mapper resource="myBatis/mappers/qna-mapper.xml"/>
+		<mapper resource="myBatis/mappers/message-mapper.xml"/>
+		<mapper resource="myBatis/mappers/search-mapper.xml"/>
+		<mapper resource="myBatis/mappers/qnaComments-mapper.xml"/>
+		<mapper resource="myBatis/mappers/adminReview-mapper.xml"/>
+		<mapper resource="myBatis/mappers/wishlistAll-mapper.xml"/>
+		<mapper resource="myBatis/mappers/view-mapper.xml"/>
+		<mapper resource="myBatis/mappers/faq-mapper.xml"/>
+		<mapper resource="myBatis/mappers/notification-mapper.xml"/>
+		<mapper resource="myBatis/mappers/deposit-mapper.xml"/>
+		<mapper resource="myBatis/mappers/adminCategory-mapper.xml"/>
+		<mapper resource="myBatis/mappers/adminChatRoom-mapper.xml"/>
+		<mapper resource="myBatis/mappers/safeTXNBoard-mapper.xml"/>
+		<mapper resource="myBatis/mappers/chat-mapper.xml"/>
+		<mapper resource="myBatis/mappers/cate-mapper.xml"/>
+	</mappers>
+	
+</configuration>

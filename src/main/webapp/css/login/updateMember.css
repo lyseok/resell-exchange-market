@@ -1,0 +1,86 @@
+@charset "UTF-8";
+.headText {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  font-size: 20px;
+}
+.upData {
+  display: flex;
+  justify-content: center;
+}
+.dataInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 100px;
+}
+
+.dataInput label {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  font-size:0;
+  gap:5px;
+}
+
+.dataInput label b{
+  display: inline-block;
+  width: 100px;
+  text-align: left;
+  margin-right: 50px;
+  letter-spacing: 1px;
+  font-size:16px;
+}
+.dataInput label:nth-child(2) b {
+  letter-spacing: 6px;
+}
+.dataInput input {
+	width:254px;
+}
+.dataInput label span{
+	font-size:12px;
+}
+
+/* .dataInput label:nth-child(4) span{
+	font-size:19px;
+} 
+ */
+#addressBtn {
+    background: #AD49E1;
+    color: #fff;
+    height: 28px;
+    width: 52px;
+   	border:none;
+}
+#user_btn_wrap{
+  display: flex;
+  margin: 0 auto;
+}
+#user_btn_wrap a, 
+#user_btn_wrap span{
+  flex-basis: 0;
+  flex-grow: 1;
+  padding: 10px 25px;
+  text-align:center;
+  width: 100px;
+}
+#user_btn_wrap span{
+	border:1px solid #666;
+	color:#666;
+}
+#addressLabel {
+  display: flex;
+  align-items: flex-start;  
+  margin-bottom: 30px;
+}
+.addr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap:10px;
+}
+.addr #zipcode{
+	width:calc(254px - 66px);
+	margin-right:10px;
+}

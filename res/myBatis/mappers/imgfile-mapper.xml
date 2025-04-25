@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="imgfile">
+	<insert id="insertProfileImg" parameterType="ImgFileVO">
+		INSERT INTO IMG_FILE
+		VALUES(seq_img_file.nextval, #{file_org_name}, #{file_save_name}, #{file_size},
+			   #{file_type}, #{file_path}, 100, #{file_no}, #{file_total})
+	</insert>
+	
+	<insert id="insertProductImg" parameterType="ImgFileVO">
+		insert into img_file
+		values(seq_img_file.nextval, #{file_org_name}, #{file_save_name}, #{file_size},
+			   #{file_type}, #{file_path}, 200, #{file_no}, #{file_total}
+		)
+	</insert>
+	
+	<delete id="deleteProductImg" parameterType="int">
+		DELETE FROM IMG_FILE WHERE FILE_SOURCE = 200 AND FILE_NO = #{prod_no}
+	</delete>
+	
+	<delete id="deleteProfileImg" parameterType="Integer">
+		DELETE FROM IMG_FILE WHERE FILE_SOURCE = 100 AND FILE_NO = #{mem_no}
+	</delete>
+	
+	<select id="countProfileImg" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(*) FROM IMG_FILE WHERE FILE_SOURCE = 100 AND FILE_NO = #{mem_no}
+	</select>
+	<select id="getProfileImg" parameterType="Integer" resultType="ImgFileVO">
+		SELECT * FROM IMG_FILE WHERE FILE_SOURCE = 100 AND FILE_NO = #{mem_no}
+	</select>	
+	<select id="getProductfileImg" parameterType="int" resultType="ImgFileVO">
+		select * from img_file where file_source = 200 and file_no= #{prod_no}
+		order by file_total
+	</select>
+	<select id="getProfileNull" resultType="ImgFileVO">
+		SELECT * FROM IMG_FILE WHERE FILE_SOURCE = 100 AND FILE_NO = 0
+	</select>
+	<insert id="insertQnaImg" parameterType="ImgFileVO">
+		INSERT INTO IMG_FILE
+		VALUES(seq_img_file.nextval, #{file_org_name}, #{file_save_name}, #{file_size},
+			   #{file_type}, #{file_path}, 300, #{file_no}, #{file_total})
+	</insert>
+	<select id="getQnaImg" parameterType="Integer" resultType="ImgFileVO">
+		SELECT * FROM IMG_FILE WHERE FILE_SOURCE = 300 AND FILE_NO = #{qna_no}
+	</select>
+	<insert id="insertQnaCommentImg" parameterType="ImgFileVO">
+		INSERT INTO IMG_FILE
+		VALUES(seq_img_file.nextval, #{file_org_name}, #{file_save_name}, #{file_size},
+			   #{file_type}, #{file_path}, 301, #{file_no}, #{file_total})
+	</insert>
+	<select id="getQnaCommentImg" parameterType="Integer" resultType="ImgFileVO">
+		SELECT * FROM IMG_FILE WHERE FILE_SOURCE = 301 AND FILE_NO = #{qna_no}
+	</select>
+	
+	<insert id="insertReportImg" parameterType="ImgFileVO">
+		INSERT INTO IMG_FILE
+		VALUES(seq_img_file.nextval, #{file_org_name}, #{file_save_name}, #{file_size},
+			   #{file_type}, #{file_path}, 300, #{file_no}, #{file_total})
+	</insert>
+</mapper>

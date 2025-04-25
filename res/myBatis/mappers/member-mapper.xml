@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+	<select id="login" parameterType="map" resultType="MemberVO">
+		select mem_no,
+		       mem_name,
+		       mem_email,
+		       mem_alias,
+		       mem_tel,
+		       mem_join_at,
+		       mem_status,
+		       mem_bal,
+		       mem_lv,
+		       pr_info,
+		       pr_rating_avg
+		  from member
+		 where mem_email = #{mem_email}
+		   and mem_pw = #{mem_pw}
+	</select>
+	
+	<select id="idCheck" parameterType="String" resultType="int">
+		select count(*)
+		  from member
+		 where mem_email = #{mem_email}
+	</select>
+	
+	<select id="getMemInfo" parameterType="int" resultType="MemberVO">
+		select mem_alias, mem_bal, mem_no
+		 from member
+		 where mem_no = #{mem_no}
+	</select>
+	
+	<insert id="insertMember" parameterType="MemberVO">
+	 	insert into member(MEM_NO, MEM_NAME, MEM_EMAIL, MEM_ALIAS, MEM_PW, MEM_JOIN_AT, PR_INFO)
+ 		       values(seq_member.nextval,
+ 		              #{mem_name},
+ 		              #{mem_email},
+ 		              #{mem_name}||'님 상점'||seq_member.currval,
+ 		              #{mem_pw},
+ 		              sysdate,
+ 		              #{mem_name}||'님의 상점입니다.')
+	</insert>
+	
+	<select id="pwCheck" parameterType="map" resultType="int">
+		select count(*)
+		  from member
+		 where mem_email = #{email}
+		   and mem_pw = #{pw}
+	</select>
+	
+	<select id="selectUpdateMember" parameterType="int" resultType="UpdateMemberVO">
+		 select a.mem_email, a.mem_no, a.mem_name, nvl(a.mem_tel, 'null') as mem_tel, b.zipcode, nvl(b.add1, 'null') as add1, nvl(b.add2, 'null') as add2
+		 from member a, address b
+		 where a.mem_no = b.mem_no
+		 and a.mem_no = #{mem_no}
+	</select>
+	
+	<update id="updateMember">
+		update member
+	       set mem_name = #{mem_name}, 
+	           mem_tel = #{mem_tel}
+	     where mem_no = #{mem_no}
+	</update>
+	
+	<update id="updateAddress">
+        update address
+           set zipcode = #{zipcode}, 
+               add1 = #{add1}, 
+               add2 = #{add2}
+         where mem_no = #{mem_no}
+    </update>
+    
+    <select id="selectAllMemberList" resultType="MemberVO">
+    <![CDATA[
+    	select * from member
+    	where mem_no < 90000
+    	 order by MEM_NO desc
+    	  ]]>
+    </select>
+    
+    <update id="updateBanMember" parameterType="int">
+    	update member set mem_status = 2
+		 where mem_no = #{mem_no}
+    </update>
+    
+    <select id="selectAdminMainMember" resultType="MemberVO">
+    <![CDATA[
+	    select * from(
+		    select * from member
+		    where mem_no < 90000
+		     order by mem_no desc)
+		 where rownum <= 5
+    ]]>
+    </select>
+</mapper>
+
+
+
+
+
+
+

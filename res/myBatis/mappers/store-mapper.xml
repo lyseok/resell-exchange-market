@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="store">
+	<select id="getStoreInfoByProd" parameterType="Integer" resultType="MemberVO">
+		SELECT * FROM MEMBER INNER JOIN PRODUCT ON(PRODUCT.MEM_NO = MEMBER.MEM_NO) WHERE PRODUCT.PROD_NO = #{prod_no}
+	</select>
+	<select id="getStoreInfoByMem" parameterType="Integer" resultType="MemberVO">
+		SELECT * FROM MEMBER WHERE MEM_NO = #{mem_no}
+	</select>
+	<select id="getProgSell" parameterType="Integer" resultType="Integer">
+		SELECT PROG_SELL FROM MEMBER_PROGRESS WHERE MEM_NO = #{mem_no}
+	</select>
+	
+	<select id="getCountAllProducts" parameterType="Integer" resultType="Integer">
+		<!--■■■■■판매관리에서 삭제 처리한 상품등록정보도 COUNT■■■■■-->
+		SELECT COUNT(*) FROM PRODUCT WHERE MEM_NO = #{mem_no}
+	</select>
+	
+	<select id="getCountSoldoutProducts" parameterType="Integer" resultType="Integer">
+		<!--■■■■■판매관리에서 삭제 처리한 상품등록정보도 COUNT■■■■■-->
+		SELECT COUNT(*) FROM PRODUCT WHERE MEM_NO = #{mem_no} AND PROD_TR_STATUS = 1
+	</select>
+	
+	<update id="updateMypageProfile" parameterType="Map">
+		UPDATE MEMBER SET MEM_ALIAS = #{mem_alias}, PR_INFO = #{pr_info} WHERE MEM_NO = #{mem_no}
+	</update>
+	
+	<select id="getStoreProdList" parameterType="Integer" resultType="ProdImgVO">
+		SELECT * 
+		  FROM PRODUCT P
+		 INNER JOIN IMG_FILE F ON(P.PROD_NO = F.FILE_NO)
+		 WHERE P.MEM_NO = #{storeId}
+		   AND F.FILE_SOURCE = 200
+		   AND F.FILE_TOTAL = 1
+		   AND P.PROD_DELETED = 0
+		 ORDER BY P.PROD_NEWING DESC
+	</select>
+	<select id="getStoreReviewList" parameterType="Integer" resultType="ReviewImgVO">
+		SELECT R.TXN_NO,
+		       R.REVIEW_RATING,
+		       R.REVIEW_CONT,
+		       R.REVIEW_TIMESTAMP,
+		       R.REVIEW_STATUS,
+		       F.FILE_ID,
+		       F.FILE_ORG_NAME,
+		       F.FILE_SAVE_NAME,
+		       F.FILE_SIZE,
+		       F.FILE_TYPE,
+		       F.FILE_PATH,
+		       F.FILE_SOURCE,
+		       F.FILE_NO,
+		       F.FILE_TOTAL,
+		       P.PROD_NAME,
+		       T.MEM_NO,
+		       M.MEM_NAME,
+		       P.PROD_PRICE,
+		       M.MEM_ALIAS,
+		       P.PROD_NO
+		  FROM REVIEW R
+		 INNER JOIN TRANSACTION T ON(R.TXN_NO = T.TXN_NO)
+		 INNER JOIN IMG_FILE F ON(T.MEM_NO = F.FILE_NO)
+		 INNER JOIN PRODUCT P ON(T.PROD_NO = P.PROD_NO)
+		 INNER JOIN MEMBER M ON(T.MEM_NO = M.MEM_NO)
+		 WHERE P.MEM_NO = #{storeId}
+		   AND FILE_SOURCE = 100
+		   AND R.REVIEW_STATUS = 0
+		 ORDER BY R.REVIEW_TIMESTAMP DESC
+	</select>
+	<select id="getStoreSoldoutList" parameterType="Integer" resultType="ProdImgVO">
+		SELECT *
+		  FROM PRODUCT P
+		 INNER JOIN IMG_FILE F ON(P.PROD_NO = F.FILE_NO)
+		 WHERE P.MEM_NO = #{storeId}
+		   AND F.FILE_SOURCE = 200
+		   AND F.FILE_TOTAL = 1
+		   AND P.PROD_TR_STATUS = 1
+		   AND P.PROD_DELETED = 0
+		 ORDER BY P.PROD_NEWING DESC
+	</select>
+	<select id="getStoreWishlist" parameterType="Integer" resultType="ProdImgVO">
+		SELECT P.PROD_NO,
+		       P.MEM_NO,
+		       P.CATE_SUB_ID,
+		       P.PROD_NAME,
+		       P.PROD_CONDITION,
+		       P.PROD_CONTENT,
+		       P.PROD_PRICE,
+		       P.PROD_AT,
+		       P.PROD_NEWING,
+		       P.PROD_DELETED,
+		       P.PRICE_OFFER,
+		       P.PROD_TR_STATUS,
+		       P.PROD_TR_APPROCH,
+		       P.PROD_VIEW,
+		       F.FILE_ID,
+		       F.FILE_ORG_NAME,
+		       F.FILE_SAVE_NAME,
+		       F.FILE_SIZE,
+		       F.FILE_TYPE,
+		       F.FILE_PATH,
+		       F.FILE_SOURCE,
+		       F.FILE_NO,
+		       F.FILE_TOTAL
+		  FROM PRODUCT P
+		  INNER JOIN WISHLIST W ON(P.PROD_NO = W.PROD_NO)
+		  INNER JOIN IMG_FILE F ON(P.PROD_NO = F.FILE_NO)
+		  WHERE W.MEM_NO = #{storeId}
+		    AND F.FILE_SOURCE = 200
+		    AND F.FILE_TOTAL = 1
+		    AND P.PROD_DELETED = 0
+		 ORDER BY P.PROD_NEWING
+	</select>
+	<select id="storeRatingAvg" parameterType="Integer" resultType="double">
+		SELECT ROUND(AVG(REVIEW_RATING), 1)
+		  FROM REVIEW R
+		 INNER JOIN TRANSACTION T ON(R.TXN_NO = T.TXN_NO)
+		 INNER JOIN IMG_FILE F ON(T.MEM_NO = F.FILE_NO)
+		 INNER JOIN PRODUCT P ON(T.PROD_NO = P.PROD_NO)
+		 INNER JOIN MEMBER M ON(T.MEM_NO = M.MEM_NO)
+		 WHERE P.MEM_NO = #{storeId}
+	</select>
+</mapper>
+

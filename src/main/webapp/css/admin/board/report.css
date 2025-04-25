@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+.admin_bd_view_tit{
+	display:flex;
+	justify-content:space-between;
+	align-items:flex-end;
+	margin-bottom:20px;
+}
+
+.admin_bd_view_tit h6{
+	font-size:28px;
+	color:#666;
+	font-weight:300;
+}
+
+.admin_bd_view_tit b{
+	font-size:22px;
+	color:#999;
+	font-weight:300;
+}
+
+.admin_bd_view_info{
+	display:flex;
+	gap:5px;
+	flex-direction: column;
+}
+
+.admin_bd_view_info div{
+	display:flex;	
+	align-items: center;
+}
+
+.admin_bd_view_info div span{
+	font-size:18px;
+	flex-basis:100px;
+	color:#999;
+}
+
+.admin_bd_view_info div b{
+	font-size:20px;
+	color:#333;
+	font-weight:300;	
+}
+
+.admin_bd_view_cont {
+	color:#999;
+	font-size:18px;
+	line-height:1.4;
+	word-break:keep-all;
+	margin:40px 0;
+}
+
+.admin_status{
+	font-size:14px;
+	color:#666;
+	padding: 5px 0;
+}
+.admin_cont{
+	display:flex;
+	justify-content:space-between;
+	align-items: flex-start;
+	border-bottom:1px solid #ccc;
+	padding:20px;
+}
+
+.admin_cont.ai_c{
+	align-items: center;
+	padding: 0 20px;
+	border: none;	
+}
+
+
+.admin_cont .admin_bd_view_cont {
+	flex-basis:100%;
+	margin:0;	
+}
+
+.admin_cont .admin_bd_view_cont ~ b{
+	flex-basis:100px;	
+    color: #bababa;
+    font-size: 16px;
+    font-weight:300;
+}
+
+.listBtn{
+	text-align:center;
+	margin-top:30px;
+}
+.listBtn a{
+	display:inline-block; 
+	border-radius:5px;
+	border:1px solid #ccc;
+	font-size:16px;
+	padding:0 55px;
+	line-height:50px;
+    color: #a7a7a7;
+}
+
+#rpt_comments_form {
+	display: flex;
+	flex-direction: row;
+}
+
+#reportCommentsBtn textarea {
+	width: 100%;
+	height: 100%;
+}
+
+#commentsArea .row_align {
+	display: flex;
+	flex-direction: column;
+	color: #bababa;
+    font-size: 16px;
+    font-weight:300;
+}
+
+#deleteReportBoard {
+	cursor: pointer;
+}

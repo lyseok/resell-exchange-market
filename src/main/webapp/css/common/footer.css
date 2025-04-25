@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+
+
+/* FOOTER */
+footer {
+  position:absolute;
+  left:0;
+  width:100%;
+  bottom:0;
+  background-color: #272727;
+  border-top: 1px solid #333;
+}
+footer .inner {
+  padding: 40px 0 60px 0;
+}
+footer .info {
+  margin-top: 30px;
+  text-align: center;
+}
+footer .info span {
+  margin-right: 20px;
+  color: #999;
+  font-size: 12px;
+}
+footer .info span:last-child {
+  margin-right: 0;
+}
+footer .copyright {
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 12px;
+}
+footer .logo { 
+  margin: 30px auto 0;
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="FAQBoard">
+<select id="selectAllFAQBoard" resultType="FAQBoardVO">
+		select faq_no, faq_title, faq_cont, faq_at, faq_type
+  		  from faq_board
+  		 order by 1 desc 
+  		 
+  		  
+  		  
+	</select>
+
+	<select id="selectedFAQBoard" resultType="FAQBoardVO">
+		select faq_no, faq_title, faq_cont, faq_at, faq_type
+  		  from faq_board
+  		 where faq_type = #{faq_type}
+  		 order by 1 DESC
+  		  
+  		  
+	</select>
+	
+	<select id="selectFAQBoard" parameterType="int" resultType="FAQBoardVO">
+		select faq_no, faq_title, faq_cont, faq_at, faq_type
+	      from faq_board
+	     where faq_no = #{faq_no}
+	</select>
+	
+	<insert id="insertFAQBoard" parameterType="FAQBoardVO">
+		insert into faq_board(faq_no, faq_title, faq_cont, faq_at, faq_type)
+		       values (
+		        	seq_faq_board.nextval,
+		        	#{faq_title},
+		        	#{faq_cont},
+		        	sysdate,
+		        	#{faq_type}
+		        	
+		        )
+	</insert>
+	<update id="updateFAQBoard" parameterType="FAQBoardVO">
+	update faq_board
+	   set faq_title = #{faq_title},
+	   	   faq_cont = #{faq_cont},
+	   	   faq_type = #{faq_type},
+	   	   faq_at = sysdate
+	 where faq_no = #{faq_no}
+	
+	</update>
+	
+	<delete id="deleteFAQBoard" parameterType="int">
+		delete from faq_board
+	 	 where faq_no = #{faq_no}
+	</delete>
+</mapper>

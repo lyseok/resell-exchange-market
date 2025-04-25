@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qnacmt">
+	<select id="selectQnaCmt" parameterType="int" resultType="QnaCommentsVO">
+		 select QNA_NO,
+		        CMT_CONT,
+		        TO_CHAR(CMT_AT, 'YYYY-MM-DD') as CMT_AT
+		   from qna_comments
+		  where qna_no=#{qna_no}
+	 </select>
+	 
+	 <insert id="insertQnaComments" parameterType="QnaCommentsVO">
+	 	insert into qna_comments(QNA_NO, CMT_CONT, CMT_AT)
+	 					values(#{qna_no}, #{cmt_cont}, sysdate)
+	 </insert>
+	 
+	 <update id="updateQnaComments" parameterType="QnaCommentsVO">
+	 	update QNA_COMMENTS
+	 	   set CMT_CONT=#{cmt_cont},
+	 	       CMT_AT = SYSDATE
+	 	 where QNA_NO=#{qna_no}
+	 </update>
+</mapper>

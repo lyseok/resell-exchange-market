@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="txnlistall">
+	<select id="gettxnlistall" resultType="SafeTXNVO">
+		
+	select
+    	s.safe_no, 
+    	p.prod_name, 
+    	p.prod_price,
+    	p.prod_no,
+    	s.safe_status, 
+    	t.mem_no as sell,
+    	p.mem_no as buy,
+    	to_char(s.safe_at, 'YYYY-MM-DD HH24:MI') as safe_at
+	from
+    	safe_transaction s 
+	join 
+    	transaction t on s.txn_no = t.txn_no
+	join 
+    	product p on t.prod_no = p.prod_no
+	order by
+    	s.safe_no desc
+	</select>
+	
+	<sql id="dynamicSearch">
+	<where>
+	<if test="searchSafeTxn == 'prod_name'">
+		prod_name like '%'||#{value}||'%'
+	</if>
+	<if test="searchSafeTxn == 'buy'">
+		p.mem_no = #{value}
+	</if>
+	<if test="searchSafeTxn == 'sell'">
+		t.mem_no = #{value}
+	</if>
+	</where>
+	</sql>
+	
+	<select id="searchtxnlist" parameterType="map" resultType="SafeTXNVO">
+		select
+    	s.safe_no, 
+    	p.prod_name, 
+    	p.prod_price, 
+    	s.safe_status, 
+    	t.mem_no as sell,
+    	p.mem_no as buy,
+    	to_char(s.safe_at, 'YYYY-MM-DD HH24:MI') as safe_at
+	from
+    	safe_transaction s 
+	join 
+    	transaction t on s.txn_no = t.txn_no
+	join 
+    	product p on t.prod_no = p.prod_no
+    	<include refid="dynamicSearch"/>
+	order by 
+		safe_no desc
+	</select>
+	
+	<select id="txnlistmodal" resultType="SafeTXNVO" parameterType="int" >
+		select
+    	s.safe_no, 
+    	p.prod_name, 
+    	p.prod_price, 
+    	s.safe_status, 
+    	t.mem_no as sell,
+    	p.mem_no as buy,
+    	to_char(s.safe_at, 'YYYY-MM-DD HH24:MI') as safe_at
+	from
+    	safe_transaction s 
+	join 
+    	transaction t on s.txn_no = t.txn_no
+	join 
+    	product p on t.prod_no = p.prod_no
+    where s.safe_no	= #{SafeTXNVO}
+	
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="reportBoard">
+	<select id="selectAllReportBoard" resultType="ReportBoardVO">
+		select RPT_NO, MEM_NO, RPT_TYPE, RPT_IDX_NO, RPT_TITLE, RPT_TEXT, RPT_TIME, RPT_STATUS, RPT_COM_STATUS
+  		  from report_board
+  		 where rpt_status = 0 
+  		 order by 1 desc
+	</select>
+	
+	<select id="selectReportBoard" parameterType="int" resultType="ReportBoardVO">
+		select RPT_NO, MEM_NO, RPT_TYPE, RPT_IDX_NO, RPT_TITLE, RPT_TEXT, RPT_TIME, RPT_STATUS, RPT_COM_STATUS
+	      from report_board
+	     where rpt_status = 0
+           and rpt_no = #{rpt_no}
+	</select>
+	
+	<insert id="insertReportBoard" parameterType="ReportBoardVO">
+		insert into report_board(RPT_NO, MEM_NO, RPT_TYPE, RPT_IDX_NO, RPT_TITLE, RPT_TEXT, RPT_TIME, RPT_STATUS)
+		       values (
+		        	seq_report_board.nextval,
+		        	#{mem_no},
+		        	#{rpt_type},
+		        	#{rpt_idx_no},
+		        	#{rpt_title},
+		        	#{rpt_text},
+		        	sysdate,
+		        	0
+		        )
+	</insert>
+	
+	<delete id="deleteReportBoard" parameterType="int">
+		delete from report_board
+	 	 where rpt_no = #{rpt_no}
+	</delete>
+	
+	<select id="getReportNoImmediately" parameterType="Integer" resultType="Integer">
+		select rpt_no from report_board where mem_no = #{mem_no} and rownum = 1 order by rpt_no desc
+	</select>
+</mapper>

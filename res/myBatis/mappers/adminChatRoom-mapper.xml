@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="admCRoom">
+	<select id="selectChatRoomAll" resultType="ChatRoomVO">
+		SELECT A.CHAT_ROOM_NO,
+		       A.MEM_NO,
+		       A.CHAT_NAME,
+		       TO_CHAR(A.CHAT_CREATE_AT, 'YYYY-MM-DD HH24:MI') AS CHAT_CREATE_AT,
+		       COUNT(B.CHAT_USER) AS CHAT_USER
+		  FROM CHATROOM A
+		 INNER JOIN CHATMEMBER B ON (B.CHAT_ROOM_NO = A.CHAT_ROOM_NO)
+		 GROUP BY A.CHAT_ROOM_NO, A.MEM_NO, A.CHAT_NAME, A.CHAT_CREATE_AT
+		 ORDER BY 1 DESC
+	</select>
+	
+	<select id="selectChatMemberAll" resultType="ChatMemberVO" parameterType="String">
+		<!-- SELECT B.CHAT_USER, 
+		       A.MEM_NO,
+		       C.MEM_NAME,
+		       C.MEM_ALIAS,
+		       C.MEM_TEL,
+		       D.MSG_NO,
+		       C.MEM_STATUS,
+		       TO_CHAR(C.MEM_JOIN_AT, 'YYYY-MM-DD HH24:MI') AS MEM_JOIN_AT
+		  FROM CHATROOM A
+		 INNER JOIN CHATMEMBER B ON (B.CHAT_ROOM_NO = A.CHAT_ROOM_NO)
+		 INNER JOIN MEMBER C ON (a.mem_no = C.MEM_NO)
+		 INNER JOIN MESSAGE D ON (B.CHAT_ROOM_NO = D.CHAT_ROOM_NO)
+		  WHERE D.MSG_NO = (
+		       SELECT MAX(MSG_NO)
+		         FROM MESSAGE
+		        WHERE CHAT_ROOM_NO = D.CHAT_ROOM_NO
+		       )
+		    and a.CHAT_ROOM_NO=#{chat_room_no}
+		 ORDER BY 1 DESC -->
+		 (
+		    select 
+		        MEM_NO, MEM_NAME, MEM_ALIAS, MEM_TEL, TO_CHAR(MEM_JOIN_AT, 'yyyy.mm.dd hh24:mi') AS MEM_JOIN_AT, MEM_STATUS
+		    from member
+		    where mem_no = (select mem_no from chatroom mem_no where chat_room_no = #{chat_room_no})
+		)
+		union
+		(
+		    select 
+		        MEM_NO, MEM_NAME, MEM_ALIAS, MEM_TEL, TO_CHAR(MEM_JOIN_AT, 'yyyy.mm.dd hh24:mi') AS MEM_JOIN_AT, MEM_STATUS
+		    from member
+		    where mem_no = (select chat_user from chatmember where chat_room_no = #{chat_room_no})
+		)
+	</select>
+	
+	
+	<select id="chatRoomSearch" resultType="ChatRoomVO" parameterType="map">
+		select A.CHAT_ROOM_NO,
+		       A.MEM_NO,
+		       A.CHAT_NAME,
+		       TO_CHAR(A.CHAT_CREATE_AT, 'YYYY-MM-DD HH24:MI') AS CHAT_CREATE_AT,
+		       COUNT(B.CHAT_USER) AS CHAT_USER
+		  from CHATROOM A
+		 INNER JOIN CHATMEMBER B ON (B.CHAT_ROOM_NO = A.CHAT_ROOM_NO)
+		 <include refid="dynamicsearch" />
+		 GROUP BY A.CHAT_ROOM_NO, A.MEM_NO, A.CHAT_NAME, A.CHAT_CREATE_AT
+	</select>
+	<sql id="dynamicsearch">
+		<where>
+			<choose>
+	            <when test="select == 'chat_room_no'">
+	                A.CHAT_ROOM_NO = #{value}
+	            </when>
+	            <when test="select == 'chat_name'">
+	                A.CHAT_NAME = #{value}
+	            </when>
+	        </choose>
+		</where>
+	</sql>
+	
+	
+	<select id="chatMemSearch" resultType="ChatMemberVO" parameterType="map">
+		SELECT B.CHAT_USER, 
+		       A.MEM_NO,
+		       C.MEM_NAME,
+		       C.MEM_ALIAS,
+		       C.MEM_TEL,
+		       D.MSG_NO,
+		       C.MEM_STATUS,
+		       TO_CHAR(C.MEM_JOIN_AT, 'YYYY-MM-DD HH24:MI') AS MEM_JOIN_AT
+		  FROM CHATROOM A
+		 INNER JOIN CHATMEMBER B ON (B.CHAT_ROOM_NO = A.CHAT_ROOM_NO)
+		 INNER JOIN MEMBER C ON (a.mem_no = C.MEM_NO)
+		 INNER JOIN MESSAGE D ON (B.CHAT_ROOM_NO = D.CHAT_ROOM_NO)
+		  WHERE D.MSG_NO = (
+		       SELECT MAX(MSG_NO)
+		         FROM MESSAGE
+		        WHERE CHAT_ROOM_NO = D.CHAT_ROOM_NO
+		       )
+		    and a.CHAT_ROOM_NO=b.CHAT_ROOM_NO
+		 	<include refid="dynamicsearch2" />
+	</select>
+	<sql id="dynamicsearch2">
+		<trim prefix="AND" prefixOverrides="AND | OR">
+			<choose>
+	            <when test="select == 'mem_no'">
+	                A.MEM_NO = #{value}
+	            </when>
+	            <when test="select == 'mem_name'">
+	                C.MEM_NAME = #{value}
+	            </when>
+	            <when test="select == 'mem_alias'">
+	                C.MEM_ALIAS = #{value}
+	            </when>
+	        </choose>
+		</trim>
+	</sql>
+</mapper>

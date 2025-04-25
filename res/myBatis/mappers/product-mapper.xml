@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product">
+	
+	<insert id="insertProduct" parameterType="ProductVO">
+		<selectKey resultType="int" keyProperty="prod_no" order="BEFORE">
+			select MAX(prod_no)+1 from product
+		</selectKey>
+		insert into product
+		values(
+			#{prod_no}, #{mem_no}, #{cate_sub_id}, #{prod_name}, #{prod_condition}, #{prod_content},
+			#{prod_price}, sysdate, sysdate, 0, #{price_offer}, 0, #{prod_tr_approch}, 0
+			)
+	</insert>
+	
+	<insert id="insertViewCount" parameterType="ViewCountVO">
+		insert into viewcount
+		values (
+			seq_viewcount.nextval, #{mem_no}, #{prod_no}, sysdate
+		)
+		
+	</insert>
+	
+	<update id="updateProduct" parameterType="ProductVO">
+		update product set cate_sub_id = #{cate_sub_id}, prod_name = #{prod_name}, prod_condition = #{prod_condition},
+						prod_content = #{prod_content}, prod_price = #{prod_price}, prod_newing = sysdate, 
+						price_offer = #{price_offer}, prod_tr_approach = #{prod_tr_approach}
+		where prod_no = #{prod_no}						  
+	</update>
+	
+	<update id="updateProdStatus" parameterType="int">
+		update product set prod_tr_status = 1
+		where prod_no = #{prod_no}
+	</update>
+	
+	<update id="updateProductView" parameterType ="int">
+		update product set prod_view = prod_view+1
+		where prod_no = #{prod_no}
+	</update>
+	
+	<select id="getProductDetail" resultType="ProductVO" parameterType="hashMap">
+		select 
+   		 p.PROD_NO, p.MEM_NO, p.CATE_SUB_ID, p.PROD_NAME, p.PROD_CONDITION, p.PROD_CONTENT, p.PROD_PRICE, p.PROD_AT, p.PROD_NEWING, p.PROD_DELETED, p.PRICE_OFFER, p.PROD_TR_STATUS, p.PROD_TR_APPROCH, p.PROD_VIEW,
+   		 c.cate_main_id,
+   		 (select count(w.mem_no) from wishlist w where w.mem_no = #{mem_no} and w.prod_no = #{prod_no}) as wish_count
+		from product p, category_sub c
+		where p.cate_sub_id = c.cate_sub_id
+		and prod_no = #{prod_no}
+	</select>
+	
+	<select id="getCountAllReview" parameterType="Integer" resultType="Integer">
+		SELECT count(*)
+		  FROM REVIEW R
+		 INNER JOIN TRANSACTION T ON(R.TXN_NO = T.TXN_NO)
+		 INNER JOIN IMG_FILE F ON(T.MEM_NO = F.FILE_NO)
+		 INNER JOIN PRODUCT P ON(T.PROD_NO = P.PROD_NO)
+		 WHERE P.MEM_NO = #{storeId}
+		   AND R.REVIEW_STATUS = 0
+	</select>
+	
+	<select id="getCateMain" resultType="CateMainVO">
+		select * from category_main
+		order by cate_main_id
+	</select>
+	
+	<select id="getCateSub" parameterType="int" resultType="CateSubVO">
+		select * from category_sub
+		where cate_main_id=#{cate_main_id}
+		order by cate_sub_id
+	</select>
+	
+	<select id="getCateName" parameterType="int" resultType="CateNameVO">
+		select b.cate_sub_name, c.cate_main_name
+		  from product a, category_sub b, category_main c
+		 where a.cate_sub_id = b.cate_sub_id
+		   and b.cate_main_id = c.cate_main_id
+		   and a.prod_no = #{prod_no}
+	</select>
+	
+	<select id="selectAllMainPageProd" resultType="ProdImgVO">
+		select *
+		  from product a, img_file b
+		 where a.prod_no = b.file_no
+		 and b.file_source = 200
+		 and b.file_total = 1
+		 and a.PROD_DELETED = 0
+
+		 order by prod_newing desc
+	</select>
+	
+	<select id="selectProdRecommend" resultType="ProdImgVO" parameterType="ProductVO">
+		select *
+        from product a, img_file b, category_sub c
+		 where a.prod_no = b.file_no
+         and a.cate_sub_id = c.cate_sub_id
+		 and b.file_source = 200
+		 and b.file_total = 1
+		 and a.prod_tr_status = 0
+         and c.cate_main_id = #{cate_main_id}
+         and a.prod_no != #{prod_no}
+         and rownum &lt;= 5
+		 order by DBMS_RANDOM.VALUE
+	</select>
+	
+	<select id="selectNewViewList" parameterType="int" resultType="NewViewVO">
+
+			select a.prod_no, a.prod_name, a.prod_price, b.view_no, b.file_path
+			  from product a, (select c.prod_no, c.view_no, d.file_path
+			                      from img_file d,(select max(view_no) as view_no, prod_no, max(view_at) as view_at
+			                              from viewcount
+			                             where mem_no = #{mem_no}
+                                           and to_char(view_at, 'yyyy-mm-dd hh24:mm') 
+                                               between to_char(sysdate - 1, 'yyyy-mm-dd hh24:mm') 
+                                                   and to_char(sysdate, 'yyyy-mm-dd hh24:mm')
+			                             group by prod_no
+			                             order by 1 desc) c
+			                        where d.file_source = 200
+			                          and d.file_no = c.prod_no
+                                      and d.file_total = 1) b
+			 where a.prod_no = b.prod_no
+			 order by view_no desc
+
+	</select>
+	
+	<select id="selectAdminMainProduct" resultType="ProductVO">
+	<![CDATA[
+	    select * from(
+		    select * from PRODUCT
+		     order by prod_no desc)
+		 where rownum <= 5 
+    ]]>
+	</select>
+	
+	<select id="selectAdminProductList" resultType="ProductVO">
+	<![CDATA[
+	    select * from(
+		    select * from PRODUCT
+		     order by prod_no desc)
+    ]]>
+	</select>
+	
+	<select id="searchAdminProduct" resultType="ProductVO" parameterType="map">
+		select * 
+		  from PRODUCT
+	    <include refid="searchAdminProductWhere" />
+	     order by prod_no desc
+
+	</select>
+	
+	<sql id="searchAdminProductWhere">
+		<where>
+			<choose>
+	            <when test="select == 'prod_no'">
+	                prod_no = #{value}
+	            </when>
+	            <when test="select == 'mem_no'">
+	                mem_no = #{value}
+	            </when>
+	            <when test="select == 'prod_name'">
+	                prod_name like '%' || #{value} || '%'
+	            </when>
+	        </choose>
+		</where>
+	</sql>
+	
+</mapper>

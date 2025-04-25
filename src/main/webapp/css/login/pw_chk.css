@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.pw_chk_wrap{
+	text-align:center;
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.pw_chk_wrap input {
+	max-width: 200px;
+	margin: 10px auto 10px;
+}
+.pw_chk_wrap #user_btn_wrap{
+	width:200px;
+	display: flex;
+	margin: 0 auto;
+}
+.pw_chk_wrap #user_btn_wrap a,
+.pw_chk_wrap #user_btn_wrap span{
+	flex-basis: 0;
+	flex-grow: 1;
+	text-align:center;
+}

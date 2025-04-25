@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+element.style{
+	font-family : 'Pretendard-Regular';
+}
+
+hr{
+	background:#f3f2f2;
+    height:1px;
+    border:0;
+}
+
+.cont{
+	border : none;
+	border-top:1px solid #ccc;
+	display:flex;
+	flex-direction: column;
+	gap:35px;
+	padding-top:40px;
+}
+
+.sell_tit{
+	margin:15px 5px;
+	font-size : 22px;
+	color : #6E6E6E;
+}
+
+.cont .cont2_box h2{
+	font-size:20px;
+	color:#666;
+}
+.cont h3{
+	font-size:18px;
+	color:#666;
+}
+.innerCont{
+	display : flex;
+	position : relative;
+}
+
+.text{
+	width : 110px;	
+}
+
+.item{
+	display : flex;
+	flex-direction : column;
+	width : calc(100% - 110px);
+}
+
+
+.innerCont2{
+	display : flex;
+	width:100%;
+	gap:50px;
+}
+.innerCont2 .cont2_box{
+	display:flex;
+	width:50%;
+}
+
+
+
+#prod_img{
+	display:inline-block;
+	width : 90px;
+	height : 90px;
+}
+.check{
+	display:flex;
+	flex-direction: column;
+    gap: 10px;
+}
+
+label{
+	display : flex;
+	align-items : center;
+	margin : 5px 0;
+}
+input[type="checkbox"]{
+	margin-right : 10px;
+}
+
+
+.item4{
+	border : 1px solid #ccc;
+	padding : 5px;
+	width : calc(100% - 110px);
+}
+.pay{
+	display : flex;
+	flex-direction : row;
+	padding : 10px;
+}
+.text2{
+	width : 110px;
+}
+.bal{
+	position : absolute;
+	right : 50px;
+}
+#bal{
+	position : absolute;
+	right : 50px;
+}
+.innerGray{
+	background-color : #ccc;
+	height : 150px;
+}
+.order{
+	text-align:right;
+}
+#order{
+	background-color: #AD49E1;
+    color: white;
+    width: 200px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    margin-top:40px;
+}
+
+
+/* 예솔 추가 */
+.buy_prod span{
+	display:block;
+	line-height:1.4;
+	word-break:keep-all;
+	margin-bottom:10px;
+}
+
+.mt60{
+	margin-top:60px;
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="noticeBoard">
+	<select id="selectAllNoticeBoard" resultType="NoticeBoardVO">
+		select NOTICE_NO, NOTICE_TITLE, NOTICE_CONT, TO_CHAR(NOTICE_AT, 'yyyy-mm-dd') as NOTICE_AT, NOTICE_CNT
+  		from notice_board
+  		order by 1 desc
+	</select>
+	
+	<select id="selectNoticeBoard" parameterType="int" resultType="NoticeBoardVO">
+		select NOTICE_NO, NOTICE_TITLE, NOTICE_CONT, TO_CHAR(NOTICE_AT, 'yyyy-mm-dd') as NOTICE_AT, NOTICE_CNT
+  		  from notice_board
+  		 where notice_no = #{notice_no}
+	</select>
+	
+	<sql id="dynamicSearch">
+	   <where>
+	      <if test="select == 'notice_title'">
+	          	${select} like '%'||#{value}||'%'
+	       </if>
+	       <if test="select == 'notice_no'">
+	       		${select} = #{value}
+	       </if>
+	   </where>
+	</sql>
+	
+	<select id="searchNoticeBoard" parameterType="map" resultType="NoticeBoardVO">
+		select NOTICE_NO, NOTICE_TITLE, NOTICE_CONT, TO_CHAR(NOTICE_AT, 'yyyy-mm-dd') as NOTICE_AT, NOTICE_CNT
+  		  from notice_board
+  		 <include refid="dynamicSearch"/>
+  		 order by 1 desc
+	</select>
+	
+	<insert id="insertNoticeBoard" parameterType="NoticeBoardVO">
+		insert into notice_board(NOTICE_NO, NOTICE_TITLE, NOTICE_CONT, NOTICE_AT, NOTICE_CNT)
+		values(
+			seq_notice_board.nextval,
+			#{notice_title},
+			#{notice_cont},
+			sysdate,
+			0
+		)
+	</insert>
+	
+	<update id="updateNoticeBoard" parameterType="NoticeBoardVO">
+		update notice_board
+		   set notice_cont = #{notice_cont}
+		 where notice_no = #{notice_no}
+	</update>
+	
+	<update id="updateNoticeCnt" parameterType="int">
+		update notice_board
+		   set notice_cnt = notice_cnt + 1
+		 where notice_no = #{notice_no}
+	</update>
+	
+	<delete id="deleteNoticeBoard" parameterType="int">
+		delete from notice_board
+ 		where notice_no = #{notice_no}
+	</delete>
+</mapper>
